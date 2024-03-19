@@ -82,8 +82,23 @@ print("My set is: ", my_author_set)
 # Create a for-loop for each of the data-structures above.
 
 # Code here
+print("=====================")
 
-for 
+for author in my_authors:
+    print("Here is an author in the LIST: ", author)
+
+print("=====================")
+
+for tuples in my_author_tuple:
+    print("Here is an author in my TUPLE: ",tuples)
+
+print("=====================")
+
+for set in my_author_set:
+    print("Here is an author in my SET: ",set)
+
+print("=====================")
+
 # Example:
 
 # for book in my_authors:
