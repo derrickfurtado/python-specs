@@ -83,11 +83,7 @@ def show_page_count(book):
     return pages
 
 
-show_authors(my_book)
-list_publish_date(my_book)
-show_title(my_book)
-show_rating(my_book)
-show_page_count(my_book)
+
 
 
 

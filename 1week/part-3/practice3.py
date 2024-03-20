@@ -69,10 +69,10 @@ print("======================")
 
 def is_prime(n):
     for i in range(2,n):
-        # print(f"i is {i} and n is {n} and the remainder is: ", n % i)
         if n % i == 0:
             return
     return n
+
 
 
 primeNumbers = []
@@ -98,7 +98,7 @@ print("The number of primes is: ", len(primeNumbers))
 
 print("======================")
 
-crypto_prices = (("Bitcoin", 1000), ("Ether", 3300), ("XRP", 45))
+crypto_prices = (("Bitcoin", 45000), ("Ether", 3300), ("XRP", 45))
 
 for x, y in crypto_prices:
     print(x)
@@ -121,6 +121,23 @@ def check_highest_price(tup):
 print("highest priced coin is: ", check_highest_price(crypto_prices))
 
 print("======================")
+
+
+n = int(input())
+
+
+squared = []
+
+
+for number in range(0,n):
+    squared.append(number * number)
+
+print(squared)
+
+
+
+print("======================")
+
 
 
 
