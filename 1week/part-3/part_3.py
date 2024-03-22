@@ -52,7 +52,9 @@ def describe_book(book):
     rating = book["rating"]
     pages = book["pages"]
 
-    return f"This book is called {title} written by {author} and published in the year {year}. With an average rating of {rating}, this book has a total length of {pages} pages."
+    script = f"This book is called {title} written by {author} and published in the year {year}. With an average rating of {rating}, this book has a total length of {pages} pages."
+
+    return script
 
 print(describe_book(my_book))
 
@@ -132,7 +134,7 @@ def describe_all_books(shelf):
     for book in shelf:
         printer.append(describe_book(book))
         print(describe_book(book))
-    return printer
+    return print(printer)
 
 
 

@@ -72,3 +72,12 @@ print(check)
 print("===================================")
 
 
+l = [1,2,3]
+s = {1,2,3}
+d = {"a":{1,2,3}, "b":2, "c":3},{"d":1, "e":2, "f":3}
+t = (1,2,3)
+
+print("this should be a list:", type(l))
+print("this should be a set:", type(s))
+print("this should be a dictionary:", type(d))
+print("this should be a tuple:", type(t))

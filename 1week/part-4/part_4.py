@@ -3,25 +3,25 @@
 ## Create five input statements to gather user's book they want to input to the system. After that be sure to turn it into a function.
 
 # Code here
-def capture_book():
-    bookName = input("What is the book's title?")
-    return bookName
 
-def capture_author():
-    author = input("Who is the book's author?")
-    return author
+bookName = input("What is the book's title? ")
 
-# def capture_year():
-#     year = input("when was the book published?")
-#     return year
 
-# def capture_rating():
-#     rating = input("What is the book's rating")
-#     return rating
 
-# def capture_pages():
-#     pages = input("How many pages does the book have?")
-#     return pages
+author = input("Who is the book's author? ")
+
+
+
+#year = input("when was the book published? ")
+
+
+
+#rating = input("What is the book's rating ")
+
+
+
+#pages = input("How many pages does the book have? ")
+
 
 
 
@@ -31,22 +31,19 @@ def capture_author():
 
 # Code here
 
-def capture_year():
-    year = input("When was the book published? ")
-    return int(year)
 
-def capture_rating():
-    rating = input("What is the book's rating ")
-    return float(rating)
-
-def capture_pages():
-    pages = input("How many pages does the book have? ")
-    return int(pages)
+year = int(input("When was the book published? "))
 
 
-print("year type is: ", type(capture_year()))
-print("rating type is: ", type(capture_rating()))
-print("pages type is: ", type(capture_pages()))
+
+rating = float(input("What is the book's rating "))
+
+
+
+pages = int(input("How many pages does the book have? "))
+
+
+
 
 ### Step 3 - Error handling
 
@@ -54,7 +51,34 @@ print("pages type is: ", type(capture_pages()))
 
 # Code here
 
+def create_book():
+    bookName = input("What is the book's title? ")
+    author = input("Who is the book's author? ")
+    try:
+        year = int(input("When was the book published? "))
+    except:
+        year = int(input("A year is required in this format (ex: 1998, 2008). What year was the book published? "))
+    try:
+        rating = float(input("What is the book's rating "))
+    except:
+        rating = float(input("A rating is required in this format (ex: 3.4 or 5) What is the book's rating "))
+    try:
+        pages = int(input("How many pages does the book have? "))
+    except:
+        pages = int(input("Pages must be in number format only. How many pages does the book have? "))
 
+
+    new_book_dic = {
+        "title": bookName,
+        "author": author,
+        "year": year,
+        "rating": rating,
+        "pages": pages
+    }
+
+    return new_book_dic
+
+print(create_book())
 
 ### Step 4 - if/elif/else
 
