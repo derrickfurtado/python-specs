@@ -11,11 +11,11 @@ def describe_book(book):
 
     return script
 
-def show_longest_book():
+def show_longest_book(db):
     largestBook = 0
     bookTitle = ""
 
-    with open("book_shelf.txt", "r") as f:
+    with open(db, "r") as f:
         read_list = f.readlines()
 
     for book in read_list:
@@ -27,11 +27,11 @@ def show_longest_book():
         else: continue
     return print(f"⭐️ {bookTitle} is the largest book with {largestBook} pages.")
         
-def show_oldest_book():
+def show_oldest_book(db):
     oldestBook = 2300
     bookTitle = ""
 
-    with open("book_shelf.txt", "r") as f:
+    with open(db, "r") as f:
         read_list = f.readlines()
         
     for book in read_list:
@@ -43,10 +43,10 @@ def show_oldest_book():
         else: continue
     return print(f"⭐️ {bookTitle} is the oldest book published in the year {oldestBook}.")
 
-def top_rated_book():
+def top_rated_book(db):
     topRating = 0
     bookTitle = ""
-    with open("book_shelf.txt", "r") as f:
+    with open(db, "r") as f:
         read_list = f.readlines()
 
     for book in read_list:
@@ -58,9 +58,9 @@ def top_rated_book():
     return print(f"⭐️ {bookTitle} is the top rated book at a rating of {topRating} out of 5 Stars.")
         
 
-def describe_all_books():
+def describe_all_books(db):
 
-    with open("book_shelf.txt", "r") as f:
+    with open(db, "r") as f:
         each_book = f.readlines()
 
     for book in each_book:
@@ -79,7 +79,7 @@ def describe_all_books():
 
 
 
-def create_book():
+def create_book(db):
     bookName = input("What is the book's title? ")
     author = input("Who is the book's author? ")
     try:
@@ -95,34 +95,34 @@ def create_book():
     except:
         pages = int(input("Pages must be in number format only. How many pages does the book have? "))
 
-    with open("book_shelf.txt", "a") as f:
+    with open(db, "a") as f:
         f.write(f"{bookName}, {author}, {year}, {rating}, {pages} \n")
 
 
 
-def main_menu():
+def main_menu(db):
     trigger = True
     
     while trigger:
         x = input("Choose an option: \n A: Add Book \n B: Describe All Books \n C: Find Oldest Book \n D: Find Longest Book \n E: Find Top Rated Book \n F: End Inquiry \n \n Selection: ")
         if x.lower() == "a":
-            create_book()
+            create_book(db)
         elif x.lower() == "b":
-            describe_all_books()
+            describe_all_books(db)
         elif x.lower() == "c":
-            show_oldest_book()
+            show_oldest_book(db)
         elif x.lower() == "d":
-            show_longest_book()
+            show_longest_book(db)
         elif x.lower() == "e":
-            top_rated_book()
+            top_rated_book(db)
         elif x.lower() == "f":
             trigger = False
         else:
             x = input("Invalid Entry!!! \n\n Only choose the following: \n A: Add Book \n B: Describe All Books \n C: Find Oldest Book \n D: Find Longest Book \n E: Find Top Rated Book \n F: End Inquiry \n \n Selection: ")
 
 
-
-main_menu()
+if __name__ == "__main__":
+    main_menu("book_shelf.txt")
 
 
 
