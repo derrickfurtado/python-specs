@@ -1,36 +1,5 @@
-my_book_shelf = [
-    {
-    "title": "To Kill a Mockingbird",
-    "author": "Harper Lee",
-    "year": 1960,
-    "rating": 4.27,
-    "pages": 324
-},{
-    "title": "1984",
-    "author": "George Orwell",
-    "year": 1949,
-    "rating": 4.17,
-    "pages": 328
-},{
-    "title": "Harry Potter and the Sorcerer's Stone",
-    "author": "J.K. Rowling",
-    "year": 1997,
-    "rating": 4.47,
-    "pages": 309
-},{
-    "title": "The Great Gatsby",
-    "author": "F. Scott Fitzgerald",
-    "year": 1925,
-    "rating": 3.91,
-    "pages": 180
-},{
-    "title": "Pride and Prejudice",
-    "author": "Jane Austen",
-    "year": 1813,
-    "rating": 4.25,
-    "pages": 279
-}
-]
+
+
 def describe_book(book):
     title = book["title"]
     author = book["author"]
@@ -38,49 +7,76 @@ def describe_book(book):
     rating = book["rating"]
     pages = book["pages"]
 
-    script = f"⭐️ {title} written by {author} and published in the year {year}. With an average rating of {rating}, this book has a total length of {pages} pages."
+    script = f"⭐️ {title} was written by {author} and published in the year {year}. With an average rating of {rating}, this book has a total length of {pages} pages."
 
     return script
 
-def show_longest_book(shelf):
+def show_longest_book():
     largestBook = 0
     bookTitle = ""
-    for book in shelf:
-        title = book["title"]
-        pages = book["pages"]
+
+    with open("book_shelf.txt", "r") as f:
+        read_list = f.readlines()
+
+    for book in read_list:
+        book = book.replace(" \n", "").split(", ")
+        pages = int(book[4])
         if pages > largestBook:
             largestBook = pages
-            bookTitle = title
+            bookTitle = book[0]
         else: continue
     return print(f"⭐️ {bookTitle} is the largest book with {largestBook} pages.")
         
-def show_oldest_book(shelf):
+def show_oldest_book():
     oldestBook = 2300
     bookTitle = ""
-    for book in shelf:
-        title = book["title"]
-        year = book["year"]
-        if year < oldestBook:
-            oldestBook = year
-            bookTitle = title
+
+    with open("book_shelf.txt", "r") as f:
+        read_list = f.readlines()
+        
+    for book in read_list:
+        book = book.replace(" \n", "").split(", ")
+        book_year = int(book[2])
+        if book_year < oldestBook:
+            oldestBook = book_year
+            bookTitle = book[0]
         else: continue
     return print(f"⭐️ {bookTitle} is the oldest book published in the year {oldestBook}.")
 
-def top_rated_book(shelf):
+def top_rated_book():
     topRating = 0
     bookTitle = ""
-    for book in shelf:
-        title = book["title"]
-        rating = book["rating"]
+    with open("book_shelf.txt", "r") as f:
+        read_list = f.readlines()
+
+    for book in read_list:
+        book = book.replace(" \n", "").split(", ")
+        rating = float(book[3])
         if rating > topRating:
             topRating = rating
-            bookTitle = title
-    return print(f"⭐️ {bookTitle} is the top rated book at a rating of {topRating}.")
+            bookTitle = book[0]
+    return print(f"⭐️ {bookTitle} is the top rated book at a rating of {topRating} out of 5 Stars.")
         
 
-def describe_all_books(shelf):
-    for book in shelf:
-        print(describe_book(book))
+def describe_all_books():
+
+    with open("book_shelf.txt", "r") as f:
+        each_book = f.readlines()
+
+    for book in each_book:
+        book = book.replace(" \n", "").split(", ")
+
+        book_dic = {
+            'title': book[0],
+            'author': book[1],
+            'year': book[2],
+            'rating': book[3],
+            'pages':book[4]
+        }
+        
+        print(describe_book(book_dic))
+
+
 
 
 def create_book():
@@ -99,42 +95,35 @@ def create_book():
     except:
         pages = int(input("Pages must be in number format only. How many pages does the book have? "))
 
-
-    new_book_dic = {
-        "title": bookName,
-        "author": author,
-        "year": year,
-        "rating": rating,
-        "pages": pages
-    }
-
-    return new_book_dic
+    with open("book_shelf.txt", "a") as f:
+        f.write(f"{bookName}, {author}, {year}, {rating}, {pages} \n")
 
 
 
-def main_menu(trigger):
-    x = input("Choose an option: \n A: Add Book \n B: Describe All Books \n C: Find Oldest Book \n D: Find Longest Book \n E: Find Top Rated Book \n F: End Inquiry \n \n Selection: ")
-    if x.lower() == "a":
-        my_book_shelf.append(create_book())
-    elif x.lower() == "b":
-        describe_all_books(my_book_shelf)
-    elif x.lower() == "c":
-        show_oldest_book(my_book_shelf)
-    elif x.lower() == "d":
-        show_longest_book(my_book_shelf)
-    elif x.lower() == "e":
-        top_rated_book(my_book_shelf)
-    elif x.lower() == "f":
-        return False
-    else:
-        x = input("ERROR!!! \n Only choose the following: \n A: Add Book \n B: Describe All Books \n C: Find Oldest Book \n D: Find Longest Book \n E: Find Top Rated Book \n F: End Inquiry \n \n Selection: ")
-    return trigger
+def main_menu():
+    trigger = True
+    
+    while trigger:
+        x = input("Choose an option: \n A: Add Book \n B: Describe All Books \n C: Find Oldest Book \n D: Find Longest Book \n E: Find Top Rated Book \n F: End Inquiry \n \n Selection: ")
+        if x.lower() == "a":
+            create_book()
+        elif x.lower() == "b":
+            describe_all_books()
+        elif x.lower() == "c":
+            show_oldest_book()
+        elif x.lower() == "d":
+            show_longest_book()
+        elif x.lower() == "e":
+            top_rated_book()
+        elif x.lower() == "f":
+            trigger = False
+        else:
+            x = input("Invalid Entry!!! \n\n Only choose the following: \n A: Add Book \n B: Describe All Books \n C: Find Oldest Book \n D: Find Longest Book \n E: Find Top Rated Book \n F: End Inquiry \n \n Selection: ")
 
 
-trigger = True
 
-while trigger:
-    trigger = main_menu(trigger)
+main_menu()
+
 
 
 

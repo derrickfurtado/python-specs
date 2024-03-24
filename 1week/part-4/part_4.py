@@ -1,5 +1,3 @@
-
-
 ### Step 1 - Input function
 
 ## Create five input statements to gather user's book they want to input to the system. After that be sure to turn it into a function.
