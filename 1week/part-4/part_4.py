@@ -1,3 +1,5 @@
+
+
 ### Step 1 - Input function
 
 ## Create five input statements to gather user's book they want to input to the system. After that be sure to turn it into a function.
@@ -86,6 +88,23 @@ print(create_book())
 
 # Code here
 
+def main_menu():
+    x = input("Choose an option: \n A: Add Book \n B: Describe All Books \n C: Find Oldest Book \n D: Find Longest Book \n E: Find Top Rated Book \n F: End Inquiry \n \n Selection: ")
+    if x.lower() == "a":
+        my_book_shelf.append(create_book())
+    elif x.lower() == "b":
+        describe_all_books(my_book_shelf)
+    elif x.lower() == "c":
+        show_oldest_book(my_book_shelf)
+    elif x.lower() == "d":
+        show_longest_book(my_book_shelf)
+    elif x.lower() == "e":
+        top_rated_book(my_book_shelf)
+    elif x.lower() == "f":
+        return False
+    else:
+        x = input("ERROR!!! \n Only choose the following: \n A: Add Book \n B: Describe All Books \n C: Find Oldest Book \n D: Find Longest Book \n E: Find Top Rated Book \n F: End Inquiry \n \n Selection: ")
+    return trigger
 
 ### Step 5 - while loops
 
@@ -93,3 +112,7 @@ print(create_book())
 
 # Code here
 
+trigger = True
+
+while trigger:
+    trigger = main_menu(trigger)
