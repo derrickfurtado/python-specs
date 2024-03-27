@@ -1,5 +1,24 @@
 from abc import ABC, abstractmethod
+import csv
+from pprint import pprint
 
+
+def read_csv ():
+    with open ("sample.csv") as csvfile:
+        reader = csv.DictReader(csvfile)
+
+        for row in reader:
+            pprint(row)
+
+def write_csv (file, cupcakes):
+    with open (file, "w", newline="/n") as csvfile:
+        fieldnames = ["size", "price", "cost", "flavor", "frosting", "filling", "sprinkles", "gluten_free"]
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+
+
+
+####################################################################
 
 class Cupcake(ABC):
 
@@ -19,6 +38,7 @@ class Cupcake(ABC):
     def add_sprinkles(self, *args):
         for sprinkles in args:
             self.sprinkles.append(sprinkles)
+
     @abstractmethod
     def make_gluten_free(self, bool):
         self.gluten_free = bool
@@ -42,7 +62,7 @@ class Cupcake(ABC):
 print("======================================")
 
 class Mini(Cupcake):
-    size = "mini"
+    size = "Mini"
 
     def __init__(self, price, cost, cake_flavor, frosting_type):
 
@@ -59,7 +79,8 @@ class Mini(Cupcake):
         self.gluten_free = bool
 
 class Regular(Cupcake):
-            
+    size = "Regular"
+
     def __init__(self, price, cost, cake_flavor, frosting_type, filling_type):
         self.price = price
         self.cost = cost
@@ -92,7 +113,7 @@ class Large(Cupcake):
         self.gluten_free = bool
 
 
-print("======================================")
+###############################################################
 
 
 strawberry_shortcake_mini = Mini(0.55, 0.35, "strawberry", "strawberry cream")
@@ -103,3 +124,9 @@ strawberry_shortcake_large = Large(3.99, 2.17, "Strawberry", "Strawberry Cream",
 
 strawberry_shortcake_large.make_gluten_free(True)
 
+
+
+
+
+if __name__ == "__main__":
+    read_csv()
