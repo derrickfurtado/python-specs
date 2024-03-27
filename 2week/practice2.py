@@ -1,85 +1,55 @@
-def new_decorator(original_func):
-    
-    def wrap_func():
-        print("before============")
-        original_func()
-        print("after==============")
-    return wrap_func
 
-def func_needs_decorator():
-    print(5 ** 2)
+
+# def func_needs_decorator():
+#     print("String")
+
+# def new_decorator(original_func):
+    
+#     def wrap_func():
+#         print("before============")
+#         original_func()
+#         print("after==============")
+#     return wrap_func
+
+# # func_needs_decorator()
+
+
+# decorated_func = new_decorator(func_needs_decorator)
+
+# # decorated_func()
+
+
+
+# # @new_decorator
+# def func_needs_decorator():
+#     print("String")
 
 
 # func_needs_decorator()
 
 
-# decorated_func = new_decorator(func_needs_decorator)
 
-# decorated_func()
-
-
-
-@new_decorator
-def func_needs_decorator():
-    print(5 ** 2)
-
-
-func_needs_decorator()
-
-
-
-print("==================================================")
+# print("==================================================")
 
 num = 5
 
-# def decorator(function, num):
-#     y = num
-#     def wrapper(y):
-#         function(y) +y
-#     return wrapper
-
-
-# def math_func(num):
-#     return num ** 2
-
-# print(f"Original function where {5} squared = ",math_func(num))
-
-# @decorator
-# def math_func(num):
-#     return num ** 2
-
-
-# print(f"Wrapped function where {num} squared + {num} = ",math_func(num))
-
-
-
-
-
-# Chat GPT Code below 👇
-
-num = 132
-
-# Original function for comparison
 def math_func(num):
     return num ** 2
 
-def decorator_with_args(num):
-    def decorator(function):
-        def wrapper(*args, **kwargs):
-            return function(*args, **kwargs) + num
-        return wrapper
-    return decorator
+def decorator(x):
+    def wrapper(num):
+        return x(num) +num
+    return wrapper
 
 
-print(f"Original function where {num} squared = ", math_func(num))
 
-# Corrected decorator usage
-@decorator_with_args(num)                           # turn off decorator by commenting this line out
-def math_func_decorated(num):
+print(f"Original function where {5} squared = ",math_func(num))
+
+@decorator
+def math_func(num):
     return num ** 2
 
-print(f"Wrapped function where {num} squared + {num} = ", math_func_decorated(num))
-
+print(f"Wrapped function where {num} squared + {num} = ",math_func(num))
 
 
 
@@ -87,7 +57,7 @@ print(f"Wrapped function where {num} squared + {num} = ", math_func_decorated(nu
 
 print("==================================================")
 
-
+cubes = 10
 def create_cubes(n):
     result = []
     for x in range(n):
@@ -95,7 +65,7 @@ def create_cubes(n):
     return result
 
 print("This process takes a lot of memory 👇")
-print("creating data in a list using range generator", create_cubes(10), "\n")
+print("creating data in a list using range generator", create_cubes(cubes), "\n")
 
 def create_eff_cubes(n):
     for x in range(n):
@@ -104,7 +74,7 @@ def create_eff_cubes(n):
 print("This process LESS memory 👇")
 print("creating data in a list using create cubes generator\n")
 
-for x in create_eff_cubes(10):
+for x in create_eff_cubes(cubes):
     print(x)
 
 
@@ -117,7 +87,7 @@ def gen_fibon(n):
         yield a
         a, b = b, a + b
 
-for number in gen_fibon(10):
+for number in gen_fibon(cubes):
     print(number)
 
 
