@@ -1,8 +1,10 @@
 from abc import ABC, abstractmethod
-import csv
+import csv, random
 from pprint import pprint
 
-csv_file = "sample.csv"
+inventory_db = "inventory.csv"
+display_db = "display.csv"
+# order_db = 
 
 
 
@@ -36,6 +38,38 @@ def append_csv (file, cupcake):
             writer.writerow({"name": cupcake.name, "size": cupcake.size, "price": cupcake.price, "cost": cupcake.cost, "flavor": cupcake.flavor, "filling": cupcake.filling, "sprinkles": cupcake.sprinkles, "gluten_free": cupcake.gluten_free})
         else:
             writer.writerow({"name": cupcake.name, "size": cupcake.size, "price": cupcake.price, "cost": cupcake.cost, "flavor": cupcake.flavor, "sprinkles": cupcake.sprinkles, "gluten_free": cupcake.gluten_free})
+
+
+
+
+
+
+
+
+
+
+def display_random_cupcakes(inventory_db, display_db):
+    batch = []
+    with open(inventory_db) as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            batch.append(row)
+    index = random.randint(0, len(batch))
+    print("******************", batch)
+
+    # with open(display_db, "w", newline="\n") as csvfile:
+    #     csv_field_names = ["name", "size", "price", "cost", "flavor", "frosting", "filling", "sprinkles", "gluten_free"]
+    #     writer = csv.DictWriter(csvfile, fieldnames=csv_field_names)
+    #     for x in batch:
+    #         if hasattr(x, "filling"):
+    #             writer.writerow({"name": x.name, "size": x.size, "price": x.price, "cost": x.cost, "flavor": x.flavor, "filling": x.filling, "sprinkles": x.sprinkles, "gluten_free": x.gluten_free})
+    #         else:
+    #             writer.writerow({"name": x.name, "size": x.size, "price": x.price, "cost": x.cost, "flavor": x.flavor, "sprinkles": x.sprinkles, "gluten_free": x.gluten_free})
+
+
+
+def display_current_order():
+    pass
 
 
 ####################################################################
@@ -168,18 +202,30 @@ cupcake_list = [
 
 ### additional Cupcakes:
 
-cupcake_7 = Mini("Vanilla Dream", 1.5, 0.75, "Vanilla", ["Rainbow Sprinkles"])
-cupcake_8 = Large("Chocolate Haven", 2.0, 1.0, "Chocolate", ["Chocolate Chips"], "Chocolage")
-cupcake_9 = Large("Strawberry Swirl", 1.8, 0.9, "Strawberry", ["Pink Sprinkles", "Hearts"], "Chocolage")
-cupcake_10 = Regular("Lemon Zest", 1.7, 0.85, "Lemon", ["Yellow Sprinkles"], "Amaretto")
-cupcake_11 = Mini("Orange Burst", 2.1, 1.05, "Orange", ["Orange Sugar"])
-cupcake_12 = Regular("Minty Fresh", 2.2, 1.1, "Mint", ["Green Sprinkles"], "Lemon")
-cupcake_13 = Regular("Blueberry Blast", 2.3, 1.15, "Blueberry", ["Blue Sprinkles"], "Berry")
-cupcake_14 = Mini("Raspberry Rage", 2.4, 1.2, "Raspberry", ["Red Sprinkles"])
-cupcake_15 = Large("Caramel Crunch", 2.5, 1.25, "Caramel", ["Gold Sprinkles"], "Caramel")
-cupcake_16 = Large("Coffee Kick", 2.6, 1.3, "Coffee", ["Chocolate Beans"], "Chocolate")
+cupcake_7 = Mini("Vanilla Dream", 1.50, 0.75, "Vanilla", ["Rainbow Sprinkles"])
+cupcake_8 = Large("Chocolate Haven", 2.00, 1.00, "Chocolate", ["Chocolate Chips"], "Chocolage")
+cupcake_9 = Large("Strawberry Swirl", 1.80, 0.90, "Strawberry", ["Pink Sprinkles", "Hearts"], "Chocolage")
+cupcake_10 = Regular("Lemon Zest", 1.70, 0.85, "Lemon", ["Yellow Sprinkles"], "Amaretto")
+cupcake_11 = Mini("Orange Burst", 2.10, 1.05, "Orange", ["Orange Sugar"])
+cupcake_12 = Regular("Minty Fresh", 2.20, 1.10, "Mint", ["Green Sprinkles"], "Lemon")
+cupcake_13 = Regular("Blueberry Blast", 2.30, 1.15, "Blueberry", ["Blue Sprinkles"], "Berry")
+cupcake_14 = Mini("Raspberry Rage", 2.40, 1.20, "Raspberry", ["Red Sprinkles"])
+cupcake_15 = Large("Caramel Crunch", 2.50, 1.250, "Caramel", ["Gold Sprinkles"], "Caramel")
+cupcake_16 = Large("Coffee Kick", 2.60, 1.30, "Coffee", ["Chocolate Beans"], "Chocolate")
 
 
 if __name__ == "__main__":
-    # write_csv(csv_file, cupcake_list)
-    read_csv(csv_file)
+
+    # write_csv(inventory_db, cupcake_list)
+
+    # append_csv(inventory_db, cupcake_7)
+    # append_csv(inventory_db, cupcake_8)
+    # append_csv(inventory_db, cupcake_9)
+    # append_csv(inventory_db, cupcake_10)
+    # append_csv(inventory_db, cupcake_11)
+    # append_csv(inventory_db, cupcake_12)
+    # append_csv(inventory_db, cupcake_13)
+    # append_csv(inventory_db, cupcake_14)
+    # append_csv(inventory_db, cupcake_15)
+
+    display_random_cupcakes(inventory_db, display_db)

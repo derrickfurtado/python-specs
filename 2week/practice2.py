@@ -1,4 +1,4 @@
-
+import send2trash
 
 # def func_needs_decorator():
 #     print("String")
@@ -125,3 +125,16 @@ print(next(s_iter))
 print(next(s_iter))
 print(next(s_iter))
 print(next(s_iter))
+
+
+print("==================================================")
+
+f = open("test.txt", "w+")
+f.write("This is a test file creation")
+f.close()
+
+
+
+
+print("==================================================")
+
