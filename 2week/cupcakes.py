@@ -3,7 +3,7 @@ import csv, random
 from pprint import pprint
 
 inventory_db = "inventory.csv"
-display_db = "display.csv"
+order_db = "order.csv"
 # order_db = 
 
 
@@ -39,38 +39,67 @@ def append_csv (file, cupcake):
         else:
             writer.writerow({"name": cupcake.name, "size": cupcake.size, "price": cupcake.price, "cost": cupcake.cost, "flavor": cupcake.flavor, "sprinkles": cupcake.sprinkles, "gluten_free": cupcake.gluten_free})
 
+####################################################################
 
 
 
 
+def display_menu(source):
+    with open(source) as csvfile:
+        reader = csv.DictReader(csvfile)
+        reader = list(reader)
+    return reader
 
 
 
+def display_random_cupcakes(source):
+    batch = []                  #should be copy of all cupcakes from the source csv
+    sorted_batch = []
 
-
-def display_random_cupcakes(inventory_db, display_db):
-    batch = []
-    with open(inventory_db) as csvfile:
+    with open(source) as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            batch.append(row)
-    index = random.randint(0, len(batch))
-    print("******************", batch)
+            batch.append(row)                       # append all cupcakes to batch list
+        index = random.randint(0, len(batch)-1)     
+        sorted_batch.append(batch[index])              
+        index = random.randint(0, len(batch)-1)                 
+        sorted_batch.append(batch[index])           #append 3 random cupcakes from batch list to sorted batch list
+        index = random.randint(0, len(batch)-1)                 
+        sorted_batch.append(batch[index])
+    
+    return sorted_batch
 
-    # with open(display_db, "w", newline="\n") as csvfile:
+    ######## No longer needing the following as I'm sending batch direct to HTML with Jinja2 ##########
+
+    # with open(target, "w", newline="\n") as csvfile:
     #     csv_field_names = ["name", "size", "price", "cost", "flavor", "frosting", "filling", "sprinkles", "gluten_free"]
     #     writer = csv.DictWriter(csvfile, fieldnames=csv_field_names)
-    #     for x in batch:
+    #     writer.writeheader()
+    #     for x in sorted_batch:
     #         if hasattr(x, "filling"):
-    #             writer.writerow({"name": x.name, "size": x.size, "price": x.price, "cost": x.cost, "flavor": x.flavor, "filling": x.filling, "sprinkles": x.sprinkles, "gluten_free": x.gluten_free})
+    #             writer.writerow({"name": x["name"], "size": x["size"], "price": x["price"], "cost": x["cost"], "flavor": x["flavor"], "filling": x["filling"], "sprinkles": x["sprinkles"], "gluten_free": x["gluten_free"]})
     #         else:
-    #             writer.writerow({"name": x.name, "size": x.size, "price": x.price, "cost": x.cost, "flavor": x.flavor, "sprinkles": x.sprinkles, "gluten_free": x.gluten_free})
+    #             writer.writerow({"name": x["name"], "size": x["size"], "price": x["price"], "cost": x["cost"], "flavor": x["flavor"], "sprinkles": x["sprinkles"], "gluten_free": x["gluten_free"]})
 
 
 
-def display_current_order():
-    pass
-
+def find_cupcake_name(source, name_query):
+    with open(source) as csvfile:
+        reader = csv.DictReader(csvfile)
+        reader_list = list(reader)
+        for cupcake in reader_list:
+            if cupcake["name"] == name_query:
+                return cupcake
+        return None
+    
+def add_cupcake_to_order(target, cupcake):
+    with open(target, "a", newline="\n") as csvfile:
+        csv_field_names = ["name", "size", "price", "cost", "flavor", "frosting", "filling", "sprinkles", "gluten_free"]
+        writer = csv.DictWriter(csvfile, fieldnames=csv_field_names)
+        if hasattr(cupcake, "filling"):
+            writer.writerow({"name": cupcake["name"], "size": cupcake["size"], "price": cupcake["price"], "cost": cupcake["cost"], "flavor": cupcake["flavor"], "filling": cupcake["filling"], "sprinkles": cupcake["sprinkles"], "gluten_free": cupcake["gluten_free"]})
+        else:
+            writer.writerow({"name": cupcake["name"], "size": cupcake["size"], "price": cupcake["price"], "cost": cupcake["cost"], "flavor": cupcake["flavor"], "sprinkles": cupcake["sprinkles"], "gluten_free": cupcake["gluten_free"]})
 
 ####################################################################
 
@@ -216,6 +245,8 @@ cupcake_16 = Large("Coffee Kick", 2.60, 1.30, "Coffee", ["Chocolate Beans"], "Ch
 
 if __name__ == "__main__":
 
+
+
     # write_csv(inventory_db, cupcake_list)
 
     # append_csv(inventory_db, cupcake_7)
@@ -228,4 +259,7 @@ if __name__ == "__main__":
     # append_csv(inventory_db, cupcake_14)
     # append_csv(inventory_db, cupcake_15)
 
-    display_random_cupcakes(inventory_db, display_db)
+    # print(display_random_cupcakes(inventory_db))
+
+    print("***********", find_cupcake_name(inventory_db, "Red Velvet"))
+
