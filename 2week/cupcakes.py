@@ -2,9 +2,6 @@ from abc import ABC, abstractmethod
 import csv, random
 from pprint import pprint
 
-inventory_db = "inventory.csv"
-order_db = "order.csv"
-# order_db = 
 
 
 
@@ -50,7 +47,11 @@ def display_menu(source):
         reader = list(reader)
     return reader
 
-
+def show_cart(source):
+    with open(source) as csvfile:
+        reader = csv.DictReader(csvfile)
+        reader = list(reader)
+    return reader
 
 def display_random_cupcakes(source):
     batch = []                  #should be copy of all cupcakes from the source csv
@@ -100,6 +101,8 @@ def add_cupcake_to_order(target, cupcake):
             writer.writerow({"name": cupcake["name"], "size": cupcake["size"], "price": cupcake["price"], "cost": cupcake["cost"], "flavor": cupcake["flavor"], "filling": cupcake["filling"], "sprinkles": cupcake["sprinkles"], "gluten_free": cupcake["gluten_free"]})
         else:
             writer.writerow({"name": cupcake["name"], "size": cupcake["size"], "price": cupcake["price"], "cost": cupcake["cost"], "flavor": cupcake["flavor"], "sprinkles": cupcake["sprinkles"], "gluten_free": cupcake["gluten_free"]})
+
+
 
 ####################################################################
 
@@ -259,7 +262,8 @@ if __name__ == "__main__":
     # append_csv(inventory_db, cupcake_14)
     # append_csv(inventory_db, cupcake_15)
 
-    # print(display_random_cupcakes(inventory_db))
+    # print(display_random_cupcakes("inventory.csv"))
 
-    print("***********", find_cupcake_name(inventory_db, "Red Velvet"))
-
+    # print("***********", find_cupcake_name(inventory_db, "Red Velvet"))
+    print(show_cart("order.csv"))
+    display_menu("inventory.csv")
