@@ -15,7 +15,10 @@
     </nav>
     <h1>Your Order</h1>
 
-
+    <div>
+        <a href="{{ url_for('remove_all_items') }}"><button>Empty Cart</button></a>
+    </div> 
+    
     <section id="cupcake_order_view">
         {% for cupcake in cupcakes %}
         <div>
@@ -23,6 +26,7 @@
             <h4>Flavor: {{ cupcake["flavor"] }}</h4>
             <h4>Size: {{ cupcake["size"] }}</h4>
             <h4> <b>Price: ${{ cupcake["price"] }}</b></h4>
+            <a href=""><button>url_for('display_order', name=cupcake['name'])</button></a>
         </div>
         {% endfor %}
     </section>

@@ -91,7 +91,7 @@ def find_cupcake_name(source, name_query):
         for cupcake in reader_list:
             if cupcake["name"] == name_query:
                 return cupcake
-        return None
+        # return None
     
 def add_cupcake_to_order(target, cupcake):
     with open(target, "a", newline="\n") as csvfile:
@@ -102,7 +102,11 @@ def add_cupcake_to_order(target, cupcake):
         else:
             writer.writerow({"name": cupcake["name"], "size": cupcake["size"], "price": cupcake["price"], "cost": cupcake["cost"], "flavor": cupcake["flavor"], "sprinkles": cupcake["sprinkles"], "gluten_free": cupcake["gluten_free"]})
 
-
+def empty_cart(target):
+    with open(target, "w", newline="\n") as csvfile:
+        csv_field_names = ["name", "size", "price", "cost", "flavor", "frosting", "filling", "sprinkles", "gluten_free"]
+        writer = csv.DictWriter(csvfile, fieldnames=csv_field_names)
+        writer.writeheader()
 
 ####################################################################
 
@@ -247,23 +251,6 @@ cupcake_16 = Large("Coffee Kick", 2.60, 1.30, "Coffee", ["Chocolate Beans"], "Ch
 
 
 if __name__ == "__main__":
-
-
-
-    # write_csv(inventory_db, cupcake_list)
-
-    # append_csv(inventory_db, cupcake_7)
-    # append_csv(inventory_db, cupcake_8)
-    # append_csv(inventory_db, cupcake_9)
-    # append_csv(inventory_db, cupcake_10)
-    # append_csv(inventory_db, cupcake_11)
-    # append_csv(inventory_db, cupcake_12)
-    # append_csv(inventory_db, cupcake_13)
-    # append_csv(inventory_db, cupcake_14)
-    # append_csv(inventory_db, cupcake_15)
-
-    # print(display_random_cupcakes("inventory.csv"))
-
-    # print("***********", find_cupcake_name(inventory_db, "Red Velvet"))
-    print(show_cart("order.csv"))
-    display_menu("inventory.csv")
+    
+    empty_cart("order.csv")
+    

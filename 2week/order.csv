@@ -1,2 +1,3 @@
 name,size,price,cost,flavor,frosting,filling,sprinkles,gluten_free
-Red Velvet,Large,3.99,1.75,Cherry,,,[],False
+Oreo,Mini,0.99,0.25,Chocolate,,,['Oreo pieces'],False
+Stars and Stripes,Regular,2.99,1.2,Blueberry,,,"['Red', 'White', 'Blue']",False
