@@ -9,12 +9,17 @@
     <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Ubermelon</a>
+            <a href="{{ url_for('homepage') }}"><button>Home Page</button></a>                      <!-- Delete later -->                  
+            <a href="{{ url_for('show_all_melons') }}"><button>All Melons</button></a>              <!-- Delete later -->
+            <a href="{{ url_for('show_cart') }}"><button>Melon Cart</button></a>                    <!-- Delete later -->
             <div class="collapse navbar-collapse">
                 <div class="navbar-nav">
                 </div>
             </div>
         </div>
     </nav>
+    {% block navbar %}
+    {% endblock %}
 
   <div class="container">
 

@@ -6,23 +6,27 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Ubermelon 🍉 All Melons</a>
-            <div class="collapse navbar-collapse">
-                <div class="navbar-nav">
-                </div>
-            </div>
-        </div>
-    </nav>
+
+    {% extends "base.html" %}
+    {% block navbar %}
+    
+    {% endblock %}
 
   <div class="container">
 
     <!-- This is where the main content goes. -->
     {% block body %}
-        BODY OF PAGE GOES HERE VIA INHERITANCE
-    {% endblock %}
 
+    {% for melon in all_melons %}
+
+    Name: {{ melon["name"]}}
+    Price: {{ melon["price"]}}
+    Color: {{ melon["color"]}}
+
+    {% endfor %}
+    
+    {% endblock %}
+    
   </div>
 
 </body>

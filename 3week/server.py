@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, flash, request
-import jinja2
+import jinja2, pdb
+from melons import melon_dict, get_melon_list
 
 app = Flask(__name__)
 app.jinja_env.undefined = jinja2.StrictUndefined        # for debugging
@@ -9,14 +10,16 @@ app.jinja_env.undefined = jinja2.StrictUndefined        # for debugging
 
 @app.route("/")
 def homepage():
-    return render_template("base.html")
+    return render_template("index.html")
 
 
 
 @app.route("/melons")
-def show_all_melons():
-
-    return render_template("melons.html")
+def show_all_melons(melon_dict):
+    all_melons = get_melon_list(melon_dict)
+    pdb.set_trace()
+    return render_template("melons.html", all_melons = all_melons)
+    
 
 
 

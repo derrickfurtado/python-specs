@@ -23,6 +23,7 @@ class Melon():
     def price_str(self):
         return f"${self.price:.2f}"
     
+    
 
 def import_melon_db(source):
     with open(source, "r") as csvfile:
@@ -42,8 +43,8 @@ def import_melon_db(source):
 def melon_lookup(melon_id):
     return melon_dict[melon_id]
 
-def get_melon_list(dic):
-    return list(dic.values())
+def get_melon_list(melon_dict):
+    return list(melon_dict.values())
     
 
 
@@ -56,6 +57,7 @@ def get_melon_list(dic):
 if __name__ == "__main__":
     
     import_melon_db(source)
+
 
 
 
