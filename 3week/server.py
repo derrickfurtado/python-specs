@@ -1,8 +1,9 @@
-from flask import Flask, render_template, redirect, flash, request
+from flask import Flask, render_template, redirect, flash, request, session
 import jinja2, pdb, melons
 
 app = Flask(__name__)
 app.jinja_env.undefined = jinja2.StrictUndefined
+app.secret_key = 'dev'                                          #this should be longer and more secure
 
 
 
@@ -22,11 +23,31 @@ def melon_details_page(melon_id):
 
 @app.route("/cart")
 def show_cart_page():
-    return render_template("cart.html")
+    cart_total = 0
+    cart_contents = []
+    cart = session.get('cart', {})
+    for melon_id, qty in cart.items():
+        melon = melons.get_by_id(melon_id)
+
+        melon_cost = qty * melon.price
+        cart_total += melon_cost
+
+        melon.quantity = qty
+        melon.melon_cost = melon_cost
+
+        cart_contents.append(melon)
+    return render_template("cart.html", cart_contents=cart_contents, cart_total=cart_total)
 
 @app.route("/add_to_cart/<melon_id>")
 def add_to_cart_func(melon_id):
-    return f"{melon_id} added to cart"
+    if 'cart' not in session:
+        session['cart'] = {}
+    cart = session["cart"]
+    cart[melon_id] = cart.get(melon_id, 0) + 1
+    session.modified = True
+    flash(f"{melon_id} added to cart")
+
+    return redirect("/cart")
 
 
 

@@ -1,23 +1,12 @@
 {% extends 'base.html' %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+
+{% block body %}
+<h1>My Shopping Cart</h1>
+
+{% for melon_id, qty in session['cart'].items() %}
+    <ul>{{ melon_id }} : {{ qty }}</ul>
+    {% endfor %}
     
-
-    {% block body %}
-    <h1>My Shopping Cart</h1>
-
-
-
-    {% endblock %}
-
-
-
-
-</body>
-</html>
+    <p> Cart contents are: {{ cart_contents }} </p>
+    <p>Cart total is: {{ cart_total }}</p>
+{% endblock %}

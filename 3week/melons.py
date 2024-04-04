@@ -29,7 +29,13 @@ def import_melon_data(source):
 
             melon_id = row["melon_id"]
 
-            melon = Melon(melon_id, row["common_name"], row["price"], row["image_url"],  row["color"], row["seedless"])
+            melon = Melon(
+                melon_id, 
+                row["common_name"], 
+                row["price"], 
+                row["image_url"],  
+                row["color"], 
+                row["seedless"])
             
             melon_dict[melon_id] = melon
 
