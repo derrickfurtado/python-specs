@@ -20,19 +20,17 @@ class Melon:
     def price_str(self):
         return f"${self.price:.2f}"
 
-    
+
+
 def import_melon_data(source):
     with open(source, "r") as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
+
             melon_id = row["melon_id"]
-            melon = Melon(
-                melon_id,
-                row["common_name"],
-                row["price"],
-                row["image_url"],
-                row["color"],
-                row["seedless"])
+
+            melon = Melon(melon_id, row["common_name"], row["price"], row["image_url"],  row["color"], row["seedless"])
+            
             melon_dict[melon_id] = melon
 
 
@@ -43,5 +41,22 @@ def get_all():
     return list(melon_dict.values())
 
 
-if __name__ == "__main__":
-    import_melon_data("melons.csv")
+
+
+import_melon_data("melons.csv")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+

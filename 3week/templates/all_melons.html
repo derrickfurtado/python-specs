@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <title>Document</title>
+</head>
+
+<body>
+    {% block body %}
+    <div id="melon-list">
+        {% for melon in melon_list %}
+        <div id="card-text-center">
+            <img class="melon-image" src="{{ melon.image_url }}">
+            <h2>
+                <a href="{{ url_for('melon_details_page', melon_id=melon.melon_id) }}">{{ melon.common_name }}</a>
+            </h2>
+            <h3>
+                <p>Price: {{ melon.price_str() }}</p>
+            </h3>
+            <div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+        {% endblock %}
+
+</body>
+
+</html>

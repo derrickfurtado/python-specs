@@ -1,0 +1,16 @@
+.melon-image {
+    height: 300px;
+    width: 300px;
+
+    border-radius: 10px;
+}
+
+#melon-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+#card-text-center {
+    margin: 5px;
+}
