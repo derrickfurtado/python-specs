@@ -1,5 +1,7 @@
 from flask import Flask, render_template, redirect, flash, request, session
-import jinja2, pdb, melons
+import jinja2, pdb, melons, bcrypt, customers
+from forms import LoginForm
+
 
 app = Flask(__name__)
 app.jinja_env.undefined = jinja2.StrictUndefined
@@ -48,6 +50,30 @@ def add_to_cart_func(melon_id):
 
     return redirect("/cart")
 
+@app.route("/empty-cart")
+def empty_cart():
+    if "cart" in session:
+        session["cart"] = {}
+    return redirect("/cart")
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    form = LoginForm(request.form)
+
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+
+        user = customers.get_by_username(username)
+
+        if not user or user["password"] != password:
+            flash("Login credentials are incorrect")
+            return redirect("/login")
+        session["username"] = user['username']
+        flash("You are logged in!")
+        return redirect("/all_melons")
+        
+    return render_template("login.html", form=form)
 
 
 

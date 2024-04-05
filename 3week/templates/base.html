@@ -11,6 +11,7 @@
     <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Ubermelon</a>
+            {% if request.path != "/login" %}                                   <!-- do not show buttons on login page-->
             <div class="collapse navbar-collapse">
                 <div class="navbar-nav">
                     <a href="/"><button type="button" class="btn btn-primary btn-sm">Home Page</button></a>
@@ -18,6 +19,7 @@
                     <a href="/cart"><button type="button" class="btn btn-primary btn-sm">Shopping Cart</button></a>
                 </div>
             </div>
+            {% endif %}
         </div>
     </nav>
 
