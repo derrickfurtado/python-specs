@@ -28,12 +28,11 @@ def show_cart_page():
     cart = session.get('cart', {})
     for melon_id, qty in cart.items():
         melon = melons.get_by_id(melon_id)
-
-        melon_cost = qty * melon.price
-        cart_total += melon_cost
+        total_cost = qty * melon.price
+        cart_total += total_cost
 
         melon.quantity = qty
-        melon.melon_cost = melon_cost
+        melon.melon_cost = total_cost
 
         cart_contents.append(melon)
     return render_template("cart.html", cart_contents=cart_contents, cart_total=cart_total)
@@ -42,7 +41,7 @@ def show_cart_page():
 def add_to_cart_func(melon_id):
     if 'cart' not in session:
         session['cart'] = {}
-    cart = session["cart"]
+    cart = session["cart"]                              #don't really understand this - from session to cart
     cart[melon_id] = cart.get(melon_id, 0) + 1
     session.modified = True
     flash(f"{melon_id} added to cart")

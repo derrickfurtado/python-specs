@@ -14,7 +14,7 @@ class Melon:
 
     def __repr__(self):
         return (
-            f"Name is: {self.common_name}\n"
+            f"This is the class object for: {self.common_name}\n"
             )
     
     def price_str(self):

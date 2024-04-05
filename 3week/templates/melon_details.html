@@ -24,7 +24,7 @@
             {% endif %}
         </div>
         
-        <a class="btn btn-primary" href="{{ url_for('add_to_cart_func', melon_id = melon.melon_id) }}">Add to Cart</a>
+        <a class="btn btn-primary" href="/add_to_cart/{{melon.melon_id}}" >Add to Cart</a>
     </section>
 
 {% endblock %}

@@ -3,10 +3,29 @@
 {% block body %}
 <h1>My Shopping Cart</h1>
 
-{% for melon_id, qty in session['cart'].items() %}
-    <ul>{{ melon_id }} : {{ qty }}</ul>
-    {% endfor %}
-    
-    <p> Cart contents are: {{ cart_contents }} </p>
-    <p>Cart total is: {{ cart_total }}</p>
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+
+            <th>Melon Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+
+        </tr>
+    </thead>
+</table>
+
+{% for melon in cart_contents %}
+    <tr>
+        <th>{{ melon.common_name }}</th>
+        <th>{{ melon.quantity }}</th>
+        <th>{{ "%.02f" | format(melon.price) }}</th>
+        <th>{{ "%.02f" | format(melon.melon_cost) }}</th>
+    </tr>
+{% endfor %}
+
+<h3>Cart total is: ${{ "%.02f" | format(cart_total) }}</h3>
+
+
 {% endblock %}
