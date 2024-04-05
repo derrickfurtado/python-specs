@@ -11,22 +11,37 @@
     <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Ubermelon</a>
-            {% if request.path != "/login" %}                                   <!-- do not show buttons on login page-->
             <div class="collapse navbar-collapse">
+                {% if request.path != "/login" and request.path != "/" %} <!-- do not show buttons on login page-->
                 <div class="navbar-nav">
-                    <a href="/"><button type="button" class="btn btn-primary btn-sm">Home Page</button></a>
-                    <a href="/all_melons"><button type="button" class="btn btn-primary btn-sm">All Melons</button></a>
+                    <a href="/all_melons"><button type="button" class="btn btn-primary btn-sm">AllMelons</button></a>
                     <a href="/cart"><button type="button" class="btn btn-primary btn-sm">Shopping Cart</button></a>
+                    <div>
+                        <a href="/log_out"><button class="btn btn-primary btn-sm">Sign Out</button></a>
+                    </div>
                 </div>
+                {% endif %}
+                {% if request.path == "/" %} <!-- only show on landing page-->
+                <div>
+                    <a href="/"><button type="button" class="btn btn-primary btn-sm">Home Page</button></a>
+                    <div>
+                        <a href="/login"><button class="btn btn-primary btn-sm">Login</button></a>
+                    </div>
+                </div>
+                {% endif %}
             </div>
-            {% endif %}
         </div>
     </nav>
 
     <div class="container">
+
+
         {% for message in get_flashed_messages() %}
         <p class="alert alert-warning">{{ message }}</p>
         {% endfor %}
+
+
+
         <!-- This is where the main content goes. -->
         {% block body %}
         BODY OF PAGE GOES HERE VIA INHERITANCE

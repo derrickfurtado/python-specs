@@ -43,7 +43,7 @@ def show_cart_page():
 def add_to_cart_func(melon_id):
     if 'cart' not in session:
         session['cart'] = {}
-    cart = session["cart"]                              #don't really understand this - from session to cart
+    cart = session["cart"]                             
     cart[melon_id] = cart.get(melon_id, 0) + 1
     session.modified = True
     flash(f"{melon_id} added to cart")
@@ -74,6 +74,14 @@ def login():
         return redirect("/all_melons")
         
     return render_template("login.html", form=form)
+
+@app.route("/log_out")
+def sign_out():
+    del session["username"]
+    flash("You have successfully logged out")
+    return redirect("/login")
+
+
 
 
 
