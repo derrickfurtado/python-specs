@@ -101,13 +101,14 @@ def register():
         current_user = customers.check_username(username)
 
         if username != current_user:
-            customers[username] = {                             ### Pick up from here
+            customers.customers[username] = {
                 "username": username,
                 "password": password,
                 "name": name
                 }
-            flash("Successfully created an account")
+            pdb.set_trace()            
             redirect("/login.html")
+            flash("Successfully created an account")
         else:
             flash("Username already exists.")
             redirect("/register.html")
