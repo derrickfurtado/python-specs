@@ -12,22 +12,26 @@
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Ubermelon</a>
             <div class="collapse navbar-collapse">
-                {% if request.path != "/login" and request.path != "/" %} <!-- do not show buttons on login page-->
+                {% if request.path != "/login" and request.path != "/" and "username" in session%}
+                <!-- do not show buttons on login page-->
                 <div class="navbar-nav">
-                    <a href="/all_melons"><button type="button" class="btn btn-primary btn-sm">AllMelons</button></a>
-                    <a href="/cart"><button type="button" class="btn btn-primary btn-sm">Shopping Cart</button></a>
                     <div>
+                        <a href="/all_melons"><button type="button" class="btn btn-primary btn-sm">AllMelons</button></a>
+                        <a href="/cart"><button type="button" class="btn btn-primary btn-sm">Shopping Cart</button></a>
+                    </div>
+                    <div id="account-links">
                         <a href="/log_out"><button class="btn btn-primary btn-sm">Sign Out</button></a>
                     </div>
                 </div>
-                {% endif %}
-                {% if request.path == "/" %} <!-- only show on landing page-->
-                <div>
+                {% else %}
+                <div class="navbar-nav">
                     <a href="/"><button type="button" class="btn btn-primary btn-sm">Home Page</button></a>
-                    <div>
+                    <div id="account-links">
                         <a href="/login"><button class="btn btn-primary btn-sm">Login</button></a>
+                        <a href="/register"><button class="btn btn-primary btn-sm">Register Account</button></a>
                     </div>
                 </div>
+
                 {% endif %}
             </div>
         </div>
@@ -44,11 +48,13 @@
 
         <!-- This is where the main content goes. -->
         {% block body %}
-        BODY OF PAGE GOES HERE VIA INHERITANCE
+
         {% endblock %}
 
     </div>
+    {% block error %}
 
+    {% endblock %}
 </body>
 
 </html>
