@@ -105,13 +105,12 @@ def register():
                 "username": username,
                 "password": password,
                 "name": name
-                }
-            pdb.set_trace()            
-            redirect("/login.html")
+                }        
             flash("Successfully created an account")
+            redirect("login.html")
         else:
             flash("Username already exists.")
-            redirect("/register.html")
+            redirect("register.html")
     return render_template("register.html", form=form)
 
 

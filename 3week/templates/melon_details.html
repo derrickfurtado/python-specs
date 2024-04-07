@@ -3,26 +3,26 @@
 {% block body %}
 
     <section id="melon_card">
-        <div>
+        <h2>
             {{ melon.common_name }}
-        </div>
+        </h2>
         <div>
             <img class="melon-image" src="{{ melon.image_url }}">
         </div>
-        <div>
+        <h3>
             {{ melon.price_str() }}
-        </div>
-        <div>
+        </h3>
+        <h3>
             {{ melon.color }}
-        </div>
-        <div>
+        </h3>
+        <h4>
             {%if melon.seedless %}
                 <li>Seedless</li>
             {% else %}
                 <li>Warning: This melon has seeds</li>
 
             {% endif %}
-        </div>
+        </h4>
         
         <a class="btn btn-primary" href="/add_to_cart/{{melon.melon_id}}" >Add to Cart</a>
     </section>

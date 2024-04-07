@@ -10,7 +10,7 @@
 <body>
     <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Ubermelon</a>
+            <a class="navbar-brand" href="/">Ubermelon</a>
             <div class="collapse navbar-collapse">
                 {% if request.path != "/login" and request.path != "/" and "username" in session%}
                 <!-- do not show buttons on login page-->
@@ -44,10 +44,22 @@
         <p class="alert alert-warning">{{ message }}</p>
         {% endfor %}
 
-
-
-        <!-- This is where the main content goes. -->
         {% block body %}
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         {% endblock %}
 

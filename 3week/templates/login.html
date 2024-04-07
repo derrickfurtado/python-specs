@@ -5,8 +5,8 @@
 <h2><b>Please Sign In Below:</b></h2>
 
 <form method="post" action="/login">
-    <div> {{ form.username.label }}: {{ form.username }} </div>
-    <div> {{ form.password.label }} : {{ form.password }}</div>
+    <div> {{ form.username.label }}: {{ form.username }} </div> <br>
+    <div> {{ form.password.label }} : {{ form.password }}</div><br>
     {{ form.csrf_token }}
 
     <button class="btn btn-primary" type="submit">Sign In</button>

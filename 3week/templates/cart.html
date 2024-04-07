@@ -1,35 +1,36 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<h1>My Shopping Cart</h1>
+<section id="shopping-cart-section">
+    <h1>My Shopping Cart</h1>
 
-<table class="table table-striped mt-3">
-    <thead>
-        <tr>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
 
-            <th>Melon Name</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Total</th>
+                <th>Melon Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
 
-        </tr>
-    </thead>
+            </tr>
+        </thead>
 
 
-    <tbody>
-        {% for melon in cart_contents %}
-        <tr id="melon-shopping-cart-row">
-            <td>{{ melon.common_name }}</td>
-            <td>{{ melon.quantity }}</td>
-            <td>{{ "%.02f" | format(melon.price) }}</td>
-            <td>{{ "%.02f" | format(melon.melon_cost) }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-<h3>Cart total is: ${{ "%.02f" | format(cart_total) }}</h3>
+        <tbody>
+            {% for melon in cart_contents %}
+            <tr id="melon-shopping-cart-row">
+                <td>{{ melon.common_name }}</td>
+                <td>{{ melon.quantity }}</td>
+                <td>{{ "%.02f" | format(melon.price) }}</td>
+                <td>{{ "%.02f" | format(melon.melon_cost) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h3>Cart total is: ${{ "%.02f" | format(cart_total) }}</h3>
 
-<a href="{{ url_for('empty_cart') }}"><button class="btn btn-primary btn-sm">Empty Cart</button></a>
-
+    <a href="{{ url_for('empty_cart') }}"><button class="btn btn-primary btn-sm">Empty Cart</button></a>
+</section>
 
 {% endblock %}

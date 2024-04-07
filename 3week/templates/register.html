@@ -6,9 +6,9 @@
 <h2><b>Please Register Below:</b></h2>
 
 <form method="post" action="/register">
-    <div> {{ form.name.label }}: {{ form.name }} </div>
-    <div> {{ form.username.label }}: {{ form.username }} </div>
-    <div> {{ form.password.label }} : {{ form.password }}</div>
+    <div> {{ form.name.label }}: {{ form.name }} </div><br>
+    <div> {{ form.username.label }}: {{ form.username }} </div><br>
+    <div> {{ form.password.label }} : {{ form.password }}</div><br>
     {{ form.csrf_token }}
 
     <button class="btn btn-primary" type="submit">Register</button>
