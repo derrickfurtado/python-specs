@@ -13,7 +13,7 @@ class User(db.Model):
     username = db.Column(db.String(255), unique = True, nullable = False)
     password = db.Column(db.String(255), nullable = False)
 
-    teams = db.relationship("Team", backref = "user", lazy = True)
+    teams = db.relationship("Team", backref = "User", lazy = True)
 
     def __init__(self, username, password):
         self.username = username,

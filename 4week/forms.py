@@ -10,9 +10,9 @@ class TeamForm(FlaskForm):
 class ProjectForm(FlaskForm):
     project_name = StringField("Project Name: ", validators=[DataRequired(), Length(min=4, max=255)])
     description = TextAreaField("Project Description: ", validators=[DataRequired(), Length(min=4, max=255)])
-    # completed = BooleanField("Has it been completed?")
-    # team_selection = SelectField("Which team will own this: ")
+    completed = BooleanField("Has it been completed?")
+    team_selection = SelectField("Which team will own this: ")
     submit = SubmitField("Add Project")
 
-    # def update_teams(self, teams):
-    #     self.team_selection.choices = [(team.id, team.team_names) for team in teams]                # need to understand this one
+    def update_teams(self, teams):
+        self.team_selection.choices = [(team.id, team.team_name) for team in teams]                # need to understand this one

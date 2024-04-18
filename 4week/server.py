@@ -36,7 +36,9 @@ def add_team():
 @app.route("/add_project", methods=["POST"])
 def add_project():
     project_form = ProjectForm()
-    # project_form.update_teams(User.query.get(user_id).teams)              ###############
+    project_form.update_teams(User.query.get(user_id).teams) 
+    set_trace()
+
 
     if project_form.validate_on_submit():
         print(f"PROJECT DATA: {project_form.project_name.data}")
@@ -53,5 +55,5 @@ def add_project():
 
 if __name__ == "__main__":
     app.debug = "development"
-    # connect_to_db(app)                                            ##############
+    connect_to_db(app)                                            ##############
     app.run(debug=True, port = 4040, host = "localhost")
