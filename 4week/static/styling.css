@@ -11,6 +11,8 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    border-style: solid;
     
 
     width: 100%;

@@ -17,6 +17,17 @@
 
 {% block body %}
 
+<div id="user_form">
+    <form action="{{ url_for('add_user') }}" method="post">
+        {{ user_form.csrf_token() }}
+        {{ user_form.username.label }}
+        {{ user_form.username }}
+        {{ user_form.password.label }}
+        {{ user_form.password }}
+        {{ user_form.submit }}
+    </form>
+</div>
+
 <div id="team_form">
     <form action="{{ url_for('add_team') }}" method="post">
         {{ team_form.csrf_token() }}

@@ -1,8 +1,11 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField, BooleanField, TextAreaField
+from wtforms import StringField, SubmitField, SelectField, BooleanField, TextAreaField, PasswordField
 from wtforms.validators import DataRequired, Length
 
-# Add user creation form
+class UserForm(FlaskForm):
+    username = StringField("Username: ", validators=[DataRequired(), Length(min=5, max=255)])
+    password = PasswordField("Password: ", validators=[DataRequired(), Length(min=5, max=255)])
+    submit = SubmitField("Register User")
 
 class TeamForm(FlaskForm):
     team_name = StringField("Team Name: ", validators=[DataRequired(), Length(min=4, max=255)])
