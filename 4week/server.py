@@ -21,6 +21,17 @@ def homepage():
                                         
     return render_template("home.html", team_form = team_form, project_form = project_form)
 
+@app.route("/projects")
+def projects_page():
+    return render_template("projects.html")
+
+@app.route("/teams")
+def team_page():
+    return render_template("teams.html")
+
+@app.route("/users")
+def user_page():
+    return render_template("users.html")
 
 @app.route("/add_team", methods=["POST"])
 def add_team():
