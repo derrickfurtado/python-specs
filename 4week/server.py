@@ -23,15 +23,19 @@ def homepage():
 
 @app.route("/projects")
 def projects_page():
-    return render_template("projects.html")
+        project_list = Project.query.all()
+        return render_template("projects.html", project_list = project_list)
+
 
 @app.route("/teams")
 def team_page():
-    return render_template("teams.html")
+    team_list = Team.query.all()
+    return render_template("teams.html", team_list=team_list)
 
 @app.route("/users")
 def user_page():
-    return render_template("users.html")
+    user_list = User.query.all()
+    return render_template("users.html", user_list=user_list)
 
 ###################################################
 
@@ -110,6 +114,33 @@ def add_project():
     else:
         flash("Form failed to validate on submit")
     return redirect(url_for("homepage"))
+
+@app.route("/complete_project")
+def complete_project():
+    id = request.args.get('project_id')
+    project_to_complete = Project.query.filter_by(id = id).all()
+    project_to_complete[0].completed = True
+    db.session.add(project_to_complete[0])
+    db.session.commit()
+    return redirect(url_for("projects_page"))
+
+
+@app.route("/delete_project")
+def delete_project():
+    id = request.args.get('project_id')
+    project_to_delete = Project.query.filter_by(id = id).all()
+    db.session.delete(project_to_delete[0])
+    db.session.commit()
+    return redirect(url_for("projects_page"))
+
+@app.route("/delete_user")
+def delete_user():
+    pass
+
+@app.route("/delete team")
+def delete_team():
+    pass
+
 
 
 

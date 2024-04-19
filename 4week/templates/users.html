@@ -6,8 +6,27 @@
 
 {% block body %}
 
+<table>
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Team Leader</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in user_list %}
+            <tr id="user_row">
+                <td>{{ user.username }}</td>
+                {% if user.teams | length > 0 %}
+                    <td>{{ user.teams[0].team_name }}</td>
+                {% else %}
+                    <td>---</td>
+                {% endif %}
+            </tr>
 
-Users and teams go here
+        {% endfor %}
+    </tbody>
+</table>
 
 
 

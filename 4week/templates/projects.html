@@ -7,9 +7,41 @@
 
 {% block body %}
 
+<table id="project_table">
+    <thead>
+        <tr id="project_table_header">
+            <th>Project Name</th>
+            <th>Description</th>
+            <th>Project Complete</th>
+            <th>Team Responsible</th>
+            <th>Team Leader</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for project in project_list %}
+        <tr id="project_row">
+            <td>{{ project.project_name }}</td>
+            <td>{{ project.description }}</td>
+            {% if project.completed == False %}
+                <td><a href="{{ url_for('complete_project', project_id = project.id) }}"><button>Click to Complete</button></a></td>
+            {% else %}
+                <td>COMPLETED</td>
+            {% endif %}
+            <td>{{ project.team.team_name}}</td>
+            <td>{{ project.team.user.username }}</td>
+            <td><a href="{{ url_for('delete_project', project_id = project.id) }}"><button>🚨 DELETE PROJECT</button></a></td>
+        </tr>
 
 
-Projects and teams go here
+        {% endfor %}
+
+    </tbody>
+
+</table>
+    
+
+    
 
 
 

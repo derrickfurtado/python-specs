@@ -6,10 +6,26 @@
 
 {% block body %}
 
+<table id="team_table">
+    <thead>
+        <tr id="team_table_header">
+            <th>Team Name</th>
+            <th>Team Lead</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for team in team_list %}
+        <tr id="team_row">
+            <td>{{ team.team_name }}</td>
+            <td>{{ team.user.username }}</td>
+        </tr>
 
 
+        {% endfor %}
 
-Teams go here
+    </tbody>
+
+</table>
 
 
 

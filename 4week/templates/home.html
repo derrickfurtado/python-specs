@@ -4,11 +4,11 @@
 
 <div id="alert_flash">
     {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-                <b>{{ message }}</b>
-            {% endfor %}
-        {% endif %}
+    {% if messages %}
+    {% for message in messages %}
+    <b>{{ message }}</b>
+    {% endfor %}
+    {% endif %}
     {% endwith %}
 
     {% endblock %}
@@ -16,42 +16,42 @@
 
 
 {% block body %}
+<section id="main_page_forms">
+    <div id="user_form">
+        <form action="{{ url_for('add_user') }}" method="post">
+            {{ user_form.csrf_token() }}
+            {{ user_form.username.label }}
+            {{ user_form.username }}
+            {{ user_form.password.label }}
+            {{ user_form.password }}
+            {{ user_form.submit }}
+        </form>
+    </div>
 
-<div id="user_form">
-    <form action="{{ url_for('add_user') }}" method="post">
-        {{ user_form.csrf_token() }}
-        {{ user_form.username.label }}
-        {{ user_form.username }}
-        {{ user_form.password.label }}
-        {{ user_form.password }}
-        {{ user_form.submit }}
-    </form>
-</div>
+    <div id="team_form">
+        <form action="{{ url_for('add_team') }}" method="post">
+            {{ team_form.csrf_token() }}
+            {{ team_form.team_name.label }}
+            {{ team_form.team_name }}
+            {{ team_form.submit }}
+        </form>
+    </div>
 
-<div id="team_form">
-    <form action="{{ url_for('add_team') }}" method="post">
-        {{ team_form.csrf_token() }}
-        {{ team_form.team_name.label }}
-        {{ team_form.team_name }}
-        {{ team_form.submit }}
-    </form>
-</div>
-
-<div id="project_form">
-    <form action="{{ url_for('add_project') }}" method="post">
-        {{ project_form.csrf_token() }}
-        {{ project_form.project_name.label }}
-        {{ project_form.project_name }}
-        {{ project_form.description.label }}
-        {{ project_form.description }}
-        {{ project_form.completed.label }}
-        {{ project_form.completed }}
-        {{ project_form.team_selection.label }}
-        {{ project_form.team_selection }}
-        {{ project_form.submit }}
-    </form>
-</div>
-
+    <div id="project_form">
+        <form action="{{ url_for('add_project') }}" method="post">
+            {{ project_form.csrf_token() }}
+            {{ project_form.project_name.label }}
+            {{ project_form.project_name }}
+            {{ project_form.description.label }}
+            {{ project_form.description }}
+            {{ project_form.completed.label }}
+            {{ project_form.completed }}
+            {{ project_form.team_selection.label }}
+            {{ project_form.team_selection }}
+            {{ project_form.submit }}
+        </form>
+    </div>
+</section>
 
 
 
