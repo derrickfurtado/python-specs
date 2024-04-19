@@ -1,5 +1,6 @@
 import os
 from flask_sqlalchemy import SQLAlchemy
+from pdb import set_trace
 
 db = SQLAlchemy()
 
@@ -28,6 +29,10 @@ class Team(db.Model):
     team_name = db.Column(db.String(255), unique = True, nullable = False)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable = False)
 
+    def __init__(self, team_name, user_id):
+        self.team_name = team_name
+        self.user_id = user_id
+
 class Project(db.Model):
 
     __tablename__ = "projects"
@@ -38,7 +43,16 @@ class Project(db.Model):
     completed = db.Column(db.Boolean, default = False)
     team_id = db.Column(db.Integer, db.ForeignKey("teams.id"), nullable = False)
 
+    def __init__(self, project_name, description, completed, team_id):
+        self.project_name = project_name
+        self.description = description
+        self.completed = completed
+        self.team_id = team_id
 
+
+def get_teams():
+    all_teams = Team.query.all()
+    return all_teams
 
 def connect_to_db(app):
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ["POSTGRES_URI"]
