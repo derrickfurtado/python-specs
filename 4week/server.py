@@ -131,17 +131,30 @@ def delete_project():
     project_to_delete = Project.query.filter_by(id = id).all()
     db.session.delete(project_to_delete[0])
     db.session.commit()
+    
+    flash("Project has been deleted!")
     return redirect(url_for("projects_page"))
 
 @app.route("/delete_user")
 def delete_user():
-    pass
+    id = request.args.get('user_id')
+    user_to_delete = User.query.filter_by(id = id).all()
+    db.session.delete(user_to_delete[0])
+    db.session.commit()
+
+    flash("User has been deleted!")
+    return redirect(url_for("user_page"))
 
 @app.route("/delete team")
 def delete_team():
-    pass
+    id = request.args.get('team_id')
+    set_trace()
+    team_to_delete = Team.query.filter_by(id = id).all()
+    db.session.delete(team_to_delete[0])
+    db.session.commit()
 
-
+    flash("Team Deleted!")
+    return render_template("team_page")
 
 
 

@@ -18,6 +18,7 @@
         <tr id="team_row">
             <td>{{ team.team_name }}</td>
             <td>{{ team.user.username }}</td>
+            <td><a href="{{ url_for('delete_team', team_id = team.id) }}"></a><button>DELETE TEAM</button></td>
         </tr>
 
 

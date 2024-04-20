@@ -1,18 +1,7 @@
 {% extends "base.html" %}
 
 {% block navbar %}
-
-<div id="alert_flash">
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    {% for message in messages %}
-    <b>{{ message }}</b>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
-
-    {% endblock %}
-</div>
+{% endblock %}
 
 
 {% block body %}

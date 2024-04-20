@@ -21,7 +21,9 @@
                     <td>{{ user.teams[0].team_name }}</td>
                 {% else %}
                     <td>---</td>
+                    <td><a href="{{ url_for('delete_user', user_id = user.id) }}"><button>DELETE USER</button></a></td>
                 {% endif %}
+
             </tr>
 
         {% endfor %}

@@ -25,6 +25,18 @@
             {% endblock %}
         </div>
 
+        <div id="alert_flash">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <b>{{ message }}</b>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+        
+
+        </div>
+
     </nav>
 
     <section id="main_section">

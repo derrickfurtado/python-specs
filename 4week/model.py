@@ -6,6 +6,7 @@ db = SQLAlchemy()
 
 
 
+
 class User(db.Model):
 
     __tablename__ = "users"
@@ -19,7 +20,6 @@ class User(db.Model):
     def __init__(self, username, password):
         self.username = username,
         self.password = password
-
 
 class Team(db.Model):
 
