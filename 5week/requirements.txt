@@ -1,11 +1,12 @@
+blinker==1.7.0
 click==8.0.1
 Flask==2.0.1
+Flask-DebugToolbar==0.11.0
 Flask-SQLAlchemy==2.5.1
-greenlet==1.1.0
+greenlet==3.0.3
 itsdangerous==2.0.1
 Jinja2==3.0.1
 MarkupSafe==2.0.1
 psycopg2-binary==2.9.3
 SQLAlchemy==1.4.18
 Werkzeug==2.0.1
-Flask-DebugToolbar==0.11.0
