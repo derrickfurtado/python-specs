@@ -1,3 +1,5 @@
+"""DB Model classes"""
+
 import os
 from flask_sqlalchemy import SQLAlchemy
 
@@ -38,7 +40,7 @@ class Movie(db.Model):
     img_url = db.Column(db.String(500), nullable = False)
 
     # ratings =  a list of rating objects
-    # cast_list = a list of cast objects
+    # cast_list = a list of cast index objects
 
     def __init__(self, title, description, release_date, img_url):
         self.title = title
@@ -80,6 +82,7 @@ class Cast_Film_Index(db.Model):
     movie_id = db.Column(db.Integer, db.ForeignKey("movie_table.id"), nullable = False)
 
     movie = db.relationship("Movie", backref = "cast_list", lazy = "subquery")
+    actor = db.relationship("Cast", backref= "cast_list", lazy = "subquery")
 
     def __init__(self, cast_id, movie_id):
         self.cast_id = cast_id
@@ -95,8 +98,12 @@ class Cast(db.Model):
     id = db.Column(db.Integer, autoincrement = True, primary_key = True)
     first_name = db.Column(db.String(255), nullable = False)
     last_name = db.Column(db.String(255), nullable = False)
-    dob = db.Column(db.DateTime, nullable = False)
+    dob = db.Column(db.Date, nullable = False)
     bio = db.Column(db.String(500), nullable = False)
+
+    # cast_list = a list of the cast index objects
+
+
 
     def __init__(self, first_name, last_name, dob, bio):
         self.first_name = first_name
