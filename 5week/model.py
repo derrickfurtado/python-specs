@@ -96,8 +96,7 @@ class Cast(db.Model):
     __tablename__ = "cast_table"
     
     id = db.Column(db.Integer, autoincrement = True, primary_key = True)
-    first_name = db.Column(db.String(255), nullable = False)
-    last_name = db.Column(db.String(255), nullable = False)
+    full_name = db.Column(db.String(255), nullable = False, unique = True)
     dob = db.Column(db.Date, nullable = False)
     bio = db.Column(db.String(500), nullable = False)
 
@@ -105,17 +104,16 @@ class Cast(db.Model):
 
 
 
-    def __init__(self, first_name, last_name, dob, bio):
-        self.first_name = first_name
-        self.last_name = last_name
+    def __init__(self, full_name, dob, bio):
+        self.full_name = full_name
         self.dob = dob
         self.bio = bio
 
     def __repr__(self):
-        return f'< Cast id={self.id}, first_name={self.first_name}, last_name={self.last_name} >'
+        return f'< Cast id={self.id}, full_name={self.full_name} >'
 
 
-def connect_to_db(flask_app, echo=True):                     # echo = True <> enables console logging of all psql submissions
+def connect_to_db(flask_app, echo=False):                     # echo = True <> enables console logging of all psql submissions
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = os.environ["POSTGRES_URI"]
     flask_app.config["SQLALCHEMY_ECHO"] = echo
     flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False

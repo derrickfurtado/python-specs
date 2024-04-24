@@ -18,8 +18,8 @@ def create_rating(user_id, movie_id, rating, description):
     new_rating = Rating(user_id, movie_id, rating, description)
     return new_rating
 
-def create_cast(first_name, last_name, dob, bio):
-    new_actor = Cast(first_name, last_name, dob, bio)
+def create_cast(full_name, dob, bio):
+    new_actor = Cast(full_name, dob, bio)
     return new_actor
 
 def create_actor_movie_index(cast_id, movie_id):
