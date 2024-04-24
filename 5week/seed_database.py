@@ -61,6 +61,9 @@ model.db.session.add_all(cleaned_list)
 model.db.session.commit()                    ###commit actors after cleaning out duplicates
 
 
+first_names_list = []
+last_names_list = []
+
 for actor in actor_list:                                ### seed index_table
     for movie in movie_data:
         movie_title = movie["title"]
@@ -69,7 +72,9 @@ for actor in actor_list:                                ### seed index_table
             movie_id = movie[0].id
             
             first_name = actor[movie_title][0]["1"][0][0]
+            first_names_list.append(first_name)
             last_name = actor[movie_title][0]["1"][0][1]
+            last_names_list.append(last_name)
             full_name = f"{first_name} {last_name}"
             actor = model.Cast.query.filter_by(full_name = full_name).all()
             actor_id = actor[0].id
@@ -80,6 +85,33 @@ for actor in actor_list:                                ### seed index_table
         else:
             pass
 
+model.db.session.commit()                               ### commit index seeds
+
+
+
+for n in range(100):
+    email = f"user{n}@gmail.com"
+    password = "test"
+    first_name = choice(first_names_list)
+    last_name = choice(last_names_list)
+
+    new_user = crud.User(first_name, last_name, email, password)
+    model.db.session.add(new_user)
+    model.db.session.commit()
+
+    for _ in range(10):
+        random_movie = choice(movies_in_db)
+        score = randint(1,5)
+        if score < 2:
+            description = "This movie sucked"
+        elif score >= 2 or score <= 3:
+            description = "This movie was ok"
+        elif score >= 4:
+            description = "This movie was awesome"
+
+        rating = crud.create_rating(new_user, random_movie, score, description)
+        model.db.session.add(rating)
+
 
 model.db.session.commit()
 
@@ -87,3 +119,4 @@ model.db.session.commit()
 
 
 print("🚨🚨 Ratings Database has been reseeded 🚨🚨")
+

@@ -58,20 +58,16 @@ class Rating(db.Model):
     id = db.Column(db.Integer, autoincrement = True, primary_key = True)
     user_id = db.Column(db.Integer, db.ForeignKey("user_table.id"), nullable = False)
     movie_id = db.Column(db.Integer, db.ForeignKey("movie_table.id"), nullable = False)
-    rating = db.Column(db.Integer, nullable = False)
+    score = db.Column(db.Integer, nullable = False)
     description = db.Column(db.String(255))
 
     user = db.relationship("User", backref = "ratings", lazy = "subquery")
     movie = db.relationship("Movie", backref = "ratings", lazy = "subquery")
 
-    def __init__(self, user_id, movie_id, rating, description):
-        self.user_id = user_id
-        self.movie_id = movie_id
-        self.rating = rating
-        self.description = description
+    ### removed init function
 
     def __repr__(self):
-        return f'< Rating id={self.id}, user_submitted={self.user_id}, movie_id={self.movie_id}, rating={self.rating} >'
+        return f'< Rating id={self.id}, user_submitted={self.user_id}, movie_id={self.movie_id}, rating={self.score} >'
 
 class Cast_Film_Index(db.Model):
 

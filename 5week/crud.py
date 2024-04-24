@@ -14,8 +14,8 @@ def create_movie(title, description, release_date, img_url):
     new_movie = Movie(title, description, release_date, img_url)
     return new_movie
 
-def create_rating(user_id, movie_id, rating, description):
-    new_rating = Rating(user_id, movie_id, rating, description)
+def create_rating(user, movie, score, description):
+    new_rating = Rating(user = user, movie = movie, score = score, description = description)
     return new_rating
 
 def create_cast(full_name, dob, bio):
