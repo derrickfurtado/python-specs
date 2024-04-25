@@ -104,21 +104,27 @@ for n in range(100):                                    ### seed user table
         score = randint(1,5)
         if score < 2:
             description = "This movie sucked"
-        elif score >= 2 or score <= 3:
+        elif 2 <= score <= 3:
             description = "This movie was ok"
-        elif score >= 4:
+        else:
             description = "This movie was awesome"
 
         rating = crud.create_rating(new_user, random_movie, score, description)
         model.db.session.add(rating)                    
         model.db.session.commit()
 
+
+############ testing #################
+
 movie = model.Movie.query.filter_by(id = 60).first()
 user = model.User.query.filter_by(id = 25).first()
 rating = model.Rating.query.filter_by(id = 25).first()
 cast = model.Cast.query.filter_by(id = 25).first()
 
-pdb.set_trace()
+for rating in user.rating:
+    print(f"{user.first_name} gave {rating.movie.title} a score of {rating.score} and said \"{rating.description}\"")
+
+
 
 
 
