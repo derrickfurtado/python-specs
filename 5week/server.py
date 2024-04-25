@@ -1,7 +1,7 @@
 """Server for movie ratings app."""
 
 from flask import Flask, render_template, redirect, request, flash, session
-from crud import create_rating, create_user
+from crud import create_rating, create_user, show_all_movies
 from model import connect_to_db
 from jinja2 import StrictUndefined
 from key import server_key
@@ -35,7 +35,8 @@ def show_actors():
 
 @app.route("/all_movies")
 def show_movies():
-    return render_template("all_movies.html")
+    movie_list = show_all_movies()
+    return render_template("all_movies.html", movie_list = movie_list)
 
 @app.route("/all_users")
 def show_users():
