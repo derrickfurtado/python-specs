@@ -89,7 +89,7 @@ model.db.session.commit()                               ### commit index seeds
 
 
 
-for n in range(100):
+for n in range(100):                                    ### seed user table
     email = f"user{n}@gmail.com"
     password = "test"
     first_name = choice(first_names_list)
@@ -97,9 +97,9 @@ for n in range(100):
 
     new_user = crud.User(first_name, last_name, email, password)
     model.db.session.add(new_user)
-    model.db.session.commit()
+    model.db.session.commit()                           ### commit user table
 
-    for _ in range(10):
+    for _ in range(10):                                 ### seed ratings for this user
         random_movie = choice(movies_in_db)
         score = randint(1,5)
         if score < 2:
@@ -110,10 +110,17 @@ for n in range(100):
             description = "This movie was awesome"
 
         rating = crud.create_rating(new_user, random_movie, score, description)
-        model.db.session.add(rating)
+        model.db.session.add(rating)                    
+        model.db.session.commit()
+
+movie = model.Movie.query.filter_by(id = 60).first()
+user = model.User.query.filter_by(id = 25).first()
+rating = model.Rating.query.filter_by(id = 25).first()
+cast = model.Cast.query.filter_by(id = 25).first()
+
+pdb.set_trace()
 
 
-model.db.session.commit()
 
 
 

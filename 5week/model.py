@@ -18,7 +18,7 @@ class User(db.Model):
     email = db.Column(db.String(255), nullable = False, unique = True)
     password = db.Column(db.String(255), nullable = False)
 
-    # ratings =  a list of rating objects
+    # rating =  a list of rating objects
 
     def __init__(self, first_name, last_name, email, password):
         self.first_name = first_name
@@ -39,7 +39,7 @@ class Movie(db.Model):
     release_date = db.Column(db.Date, nullable = False)
     img_url = db.Column(db.String(500), nullable = False)
 
-    # ratings =  a list of rating objects
+    # rating =  a list of rating objects
     # cast_list = a list of cast index objects
 
     def __init__(self, title, description, release_date, img_url):
@@ -61,8 +61,8 @@ class Rating(db.Model):
     score = db.Column(db.Integer, nullable = False)
     description = db.Column(db.String(255))
 
-    user = db.relationship("User", backref = "ratings", lazy = "subquery")
-    movie = db.relationship("Movie", backref = "ratings", lazy = "subquery")
+    user = db.relationship("User", backref = "rating", lazy = "subquery")
+    movie = db.relationship("Movie", backref = "rating", lazy = "subquery")
 
     ### removed init function
 
