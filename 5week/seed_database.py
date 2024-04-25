@@ -116,18 +116,15 @@ for n in range(100):                                    ### seed user table
 
 ############ testing #################
 
-movie = model.Movie.query.filter_by(id = 60).first()
-user = model.User.query.filter_by(id = 25).first()
-rating = model.Rating.query.filter_by(id = 25).first()
-cast = model.Cast.query.filter_by(id = 25).first()
+movie = model.Movie.query.all()
+user = model.User.query.all()
+rating = model.Rating.query.all()
+cast = model.Cast.query.all()
 
-for rating in user.rating:
-    print(f"{user.first_name} gave {rating.movie.title} a score of {rating.score} and said \"{rating.description}\"")
-
-
-
-
-
+for index, movie in enumerate(movie):
+    if index >= 3:
+        break
+    print(f"\n\n{movie.title} = {movie.description}\n\nLead Actor = {movie.cast_list[0].actor.full_name} \nBio = {movie.cast_list[0].actor.bio}\n\n")
 
 
 

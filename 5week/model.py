@@ -61,8 +61,8 @@ class Rating(db.Model):
     score = db.Column(db.Integer, nullable = False)
     description = db.Column(db.String(255))
 
-    user = db.relationship("User", backref = "rating", lazy = "subquery")
-    movie = db.relationship("Movie", backref = "rating", lazy = "subquery")
+    user = db.relationship("User", backref = "rating")
+    movie = db.relationship("Movie", backref = "rating")
 
     ### removed init function
 
@@ -77,8 +77,8 @@ class Cast_Film_Index(db.Model):
     cast_id = db.Column(db.Integer, db.ForeignKey("cast_table.id"), nullable = False)
     movie_id = db.Column(db.Integer, db.ForeignKey("movie_table.id"), nullable = False)
 
-    movie = db.relationship("Movie", backref = "cast_list", lazy = "subquery")
-    actor = db.relationship("Cast", backref= "cast_list", lazy = "subquery")
+    movie = db.relationship("Movie", backref = "cast_list")
+    actor = db.relationship("Cast", backref= "cast_list")
 
     def __init__(self, cast_id, movie_id):
         self.cast_id = cast_id

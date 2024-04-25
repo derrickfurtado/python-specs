@@ -1,17 +1,49 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>
-      {% block title %}{% endblock %}
-    </title>
 
-    {% block head %}{% endblock %}
-  </head>
-  <body>
-    {% block body %}{% endblock %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="templates/styling.css">
+  <title>
 
-    {% block after_body %}{% endblock %}
-  </body>
+
+    {% block title %}
+    {% endblock %}
+
+
+  </title>
+
+  {% block head %}
+  {% endblock %}
+
+</head>
+
+<body>
+
+  <nav>
+    <a href="/"><button>Home Page</button></a>
+    <a href="login"><button>Login</button></a>
+    <a href="create_account"><button>Create Account</button></a>
+    <a href="all_movies"><button>All Movies</button></a>
+    <a href="all_users"><button>All Users</button></a>
+    <a href="all_actors"><button>All Actors</button></a>
+    <a href="actor_details"><button>Actor Details</button></a>
+    <a href="user_details"><button>User Profile</button></a>
+    <a href="add_rating"><button>Add Rating</button></a>
+    <a href="movie_details"><button>Movie Details</button></a>
+
+    {% block navbar %}
+    {% endblock %}
+  </nav>
+
+  {% block body %}
+  {% endblock %}
+
+  {% block after_body %}
+  {% endblock %}
+
+
+</body>
+
 </html>
