@@ -25,6 +25,15 @@
     Lead Actor: <a href="/actor_details/{{movie.cast_list[0].actor.id}}">{{ movie.cast_list[0].actor.full_name }}</a>
 </h3>
 
+<h4>
+  Average Score:
+  <h1>{{average_rating}}</h1>
+
+  {% for rating in rating_list %}
+    <li>{{rating.score}}</li> out of 5 submitted by <a href="/user_details/{{ rating.user_id }}">{{ rating.user.first_name }} {{ rating.user.last_name }}</a>
+  {% endfor %}
+</h4>
+
 {% endblock %}
 
 {% block after_body %}

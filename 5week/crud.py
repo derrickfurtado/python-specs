@@ -1,6 +1,7 @@
 """Crud Operations"""
 
 from model import User, Movie, Rating, Cast_Film_Index, Cast, db, connect_to_db
+import pdb
 
 
 
@@ -9,6 +10,16 @@ from model import User, Movie, Rating, Cast_Film_Index, Cast, db, connect_to_db
 def create_user(first_name, last_name, email, password):
     new_user = User(first_name, last_name, email, password)
     return new_user
+
+def show_all_users():
+    return User.query.all()
+
+def get_user_by_id(id):
+    return User.query.get(id)
+
+def get_user_ratings(user_id):
+    return Rating.query.filter_by(user_id = user_id)
+
 
 #######################
 
@@ -27,6 +38,22 @@ def get_movie_by_id(id):
 def create_rating(user, movie, score, description):
     new_rating = Rating(user = user, movie = movie, score = score, description = description)
     return new_rating
+
+def get_ratings_by_id(movie_id):
+    rating_list = Rating.query.filter_by(movie_id = movie_id).all()
+    return rating_list
+
+def get_rating_stats(movie_id):
+    rating_list = Rating.query.filter_by(movie_id = movie_id).all()
+    average_rating = 0.0
+    total_score = 0
+    counter = 0
+    for score in rating_list:
+        total_score += score.score
+        counter += 1
+    average_rating = round(total_score/counter, 2)
+    return average_rating
+
 
 #######################
 

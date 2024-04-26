@@ -12,7 +12,9 @@
 
 
 {% block body %}
-All Users
+    {% for user in user_list %}
+        <a href="/user_details/{{ user.id }}"><li>{{ user.first_name }} {{ user.last_name }}</li></a>
+    {% endfor %}
 {% endblock %}
 
 {% block after_body %}

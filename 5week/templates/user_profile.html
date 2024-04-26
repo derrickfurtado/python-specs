@@ -12,7 +12,15 @@
 
 
 {% block body %}
-User Profile
+<h2>Username: <br>{{ user.first_name }} {{ user.last_name }}</h2>
+
+<h2>Email: <br>{{ user.email }}</h2>
+
+All Submitted reviews:
+
+{% for rating in rating_list %}
+    <li>{{ rating.score }} out of 5 for <a href="/movie_detail/{{ rating.movie_id }}">{{ rating.movie.title }}</a></li>
+{% endfor %}
 {% endblock %}
 
 {% block after_body %}

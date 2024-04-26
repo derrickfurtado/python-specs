@@ -17,21 +17,24 @@ app.jinja_env.undefined = StrictUndefined
 def homepage():
     return render_template("homepage.html")
 
-@app.route("/login")
-def login():
-    return render_template("login.html")
+# @app.route("/login")
+# def login():
+#     return render_template("login.html")
 
-@app.route("/create_account")
-def create_account():
-    return render_template("create_account.html")
+# @app.route("/create_account")
+# def create_account():
+#     return render_template("create_account.html")
 
 @app.route("/all_users")
 def show_users():
-    return render_template("all_users.html")
+    user_list = crud.show_all_users()
+    return render_template("all_users.html", user_list = user_list)
 
-@app.route("/user_details")
-def user_details():
-    return render_template("user_profile.html")
+@app.route("/user_details/<user_id>")
+def user_details(user_id):
+    user = crud.get_user_by_id(user_id)
+    rating_list = crud.get_user_ratings(user_id)
+    return render_template("user_profile.html", user = user, rating_list = rating_list)
 
 #######################
 
@@ -43,7 +46,9 @@ def show_movies():
 @app.route("/movie_detail/<movie_id>")                                                         ### view a single movie
 def movie_details(movie_id):
     movie = crud.get_movie_by_id(movie_id)
-    return render_template("movie_detail.html", movie = movie)
+    rating_list = crud.get_ratings_by_id(movie_id)
+    average_rating = crud.get_rating_stats(movie_id)
+    return render_template("movie_detail.html", movie = movie, rating_list = rating_list, average_rating = average_rating)
 
 #######################
 
@@ -60,9 +65,9 @@ def actor_details(actor_id):
 
 #######################
 
-@app.route("/add_rating")
-def add_rating():
-    return render_template("add_rating.html")
+# @app.route("/add_rating")
+# def add_rating():
+#     return render_template("add_rating.html")
 
 
 
