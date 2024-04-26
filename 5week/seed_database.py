@@ -99,7 +99,7 @@ for n in range(100):                                    ### seed user table
     model.db.session.add(new_user)
     model.db.session.commit()                           ### commit user table
 
-    for _ in range(10):                                 ### seed ratings for this user
+    for _ in range(2):                                 ### seed ratings for this user
         random_movie = choice(movies_in_db)
         score = randint(1,5)
         if score < 2:
@@ -112,20 +112,6 @@ for n in range(100):                                    ### seed user table
         rating = crud.create_rating(new_user, random_movie, score, description)
         model.db.session.add(rating)                    
         model.db.session.commit()
-
-
-############ testing #################
-
-movie = model.Movie.query.all()
-user = model.User.query.all()
-rating = model.Rating.query.all()
-cast = model.Cast.query.all()
-
-for index, movie in enumerate(movie):
-    if index >= 3:
-        break
-    print(f"\n\n{movie.title} = {movie.description}\n\nLead Actor = {movie.cast_list[0].actor.full_name} \nBio = {movie.cast_list[0].actor.bio}\n\n")
-
 
 
 print("🚨🚨 Ratings Database has been reseeded 🚨🚨")

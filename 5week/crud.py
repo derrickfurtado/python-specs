@@ -11,6 +11,9 @@ def create_user(first_name, last_name, email, password):
     new_user = User(first_name, last_name, email, password)
     return new_user
 
+def user_check_by_email(email):
+    return User.query.filter(User.email == email).first()
+
 def show_all_users():
     return User.query.all()
 
@@ -30,8 +33,9 @@ def create_movie(title, description, release_date, img_url):
 def show_all_movies():
     return Movie.query.order_by(Movie.title).all()
 
-def get_movie_by_id(id):
-    return Movie.query.get(id)
+def get_movie_by_id(movie_id):
+    return Movie.query.get(movie_id)
+
 
 #######################
 
@@ -45,13 +49,19 @@ def get_ratings_by_id(movie_id):
 
 def get_rating_stats(movie_id):
     rating_list = Rating.query.filter_by(movie_id = movie_id).all()
-    average_rating = 0.0
     total_score = 0
     counter = 0
     for score in rating_list:
         total_score += score.score
         counter += 1
     average_rating = round(total_score/counter, 2)
+    if average_rating < 2:
+        average_rating = f"{average_rating} 👎"
+    elif average_rating >=2 and average_rating <4:
+        average_rating = f"{average_rating} 👌"
+    else:
+        average_rating = f"{average_rating} 🔥"
+
     return average_rating
 
 

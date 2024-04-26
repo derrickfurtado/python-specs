@@ -14,11 +14,19 @@
 
 {% block body %}
     <h1>{{actor.full_name}}</h1>
-    <li>DOB = {{ actor.dob.strftime('%B %d, %Y') }}</li>
+    <h3>
+        Date of Birth:
+    </h3>
+    <li>{{ actor.dob.strftime('%B %d, %Y') }}</li>
+    <h3>
+        Bio:
+    </h3>
     <p>{{ actor.bio }}</p>
-
+    <h3>
+        Known for:
+    </h3>
     {% for film in work_list %}
-        <a href="/movie_detail/{{film.movie.id}}"><li>{{film.movie.title}}</li></a>
+        <a href="/movie_detail/{{film.movie.id}}"><li>{{film.movie.title}}</a> released on {{film.movie.release_date.strftime('%B %d, %Y')}}</li>
     {% endfor %}
 
 {% endblock %}

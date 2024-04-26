@@ -2,7 +2,7 @@
 
 from flask import Flask, render_template, redirect, request, flash, session
 import crud, pdb
-from model import connect_to_db
+import model
 from jinja2 import StrictUndefined
 from key import server_key
 
@@ -13,17 +13,38 @@ app.jinja_env.undefined = StrictUndefined
 
 
 
-@app.route("/")
+@app.route("/homepage")
 def homepage():
     return render_template("homepage.html")
 
-# @app.route("/login")
-# def login():
-#     return render_template("login.html")
+@app.route("/dashboard")
+def dashboard():
+    movie_list = crud.show_all_movies()
+    return render_template("dashboard.html", movie_list = movie_list)
 
-# @app.route("/create_account")
-# def create_account():
-#     return render_template("create_account.html")
+@app.route("/login")
+def login():
+    return render_template("dashboard.html")
+
+@app.route("/create_account", methods = ["POST"])
+def create_account():
+    first_name = request.form["first"]
+    last_name = request.form["last"]
+    email = request.form["email"]
+    password = request.form["password"]
+    user_check = crud.user_check_by_email(email)
+
+    try:
+        if user_check:
+            flash("Email Already Exists!")
+        else:
+            new_user = crud.create_user(first_name, last_name, email, password)
+            model.db.session.add(new_user)
+            model.db.session.commit()
+            flash("Account created!")
+    except:
+        flash("Unknown Error occurred!")
+    return render_template("homepage.html")
 
 @app.route("/all_users")
 def show_users():
@@ -65,9 +86,9 @@ def actor_details(actor_id):
 
 #######################
 
-# @app.route("/add_rating")
-# def add_rating():
-#     return render_template("add_rating.html")
+@app.route("/add_rating")
+def add_rating():
+    return render_template("add_rating.html")
 
 
 
@@ -75,5 +96,5 @@ def actor_details(actor_id):
 
 if __name__ == "__main__":
 
-    connect_to_db(app)
+    model.connect_to_db(app)
     app.run(host = "localhost", port = 4040, debug=True)

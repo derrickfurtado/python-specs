@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+
+
+{% block body %}
+
+<section id="display_section">
+{% for movie in movie_list %}
+    <div>
+        <a href="/movie_detail/{{movie.id}}"><img id="movie_poster" src="{{ movie.img_url }}"></a>
+    </div>
+    {% endfor %}
+</section>
+
+{% endblock %}
+
+{% block after_body %}
+{% endblock %}

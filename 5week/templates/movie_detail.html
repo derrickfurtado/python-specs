@@ -7,7 +7,7 @@
 {% block head %}
 {% endblock %}
 
-{% block navbar %}
+{% block navbar %} 
 {% endblock %}
 
 
@@ -22,17 +22,25 @@
 <img id="movie_poster" src="{{ movie.img_url }}">
 
 <h3>
-    Lead Actor: <a href="/actor_details/{{movie.cast_list[0].actor.id}}">{{ movie.cast_list[0].actor.full_name }}</a>
+  Lead Actor: <a href="/actor_details/{{movie.cast_list[0].actor.id}}">{{ movie.cast_list[0].actor.full_name }}</a>
 </h3>
 
-<h4>
+<h3>
   Average Score:
-  <h1>{{average_rating}}</h1>
+</h3>
+<h1>
+  {{ average_rating }}
+</h1>
+<h3>
+  Total Reviews:
+</h3>
+<h1>{{ rating_list | length }}</h1>
 
-  {% for rating in rating_list %}
-    <li>{{rating.score}}</li> out of 5 submitted by <a href="/user_details/{{ rating.user_id }}">{{ rating.user.first_name }} {{ rating.user.last_name }}</a>
-  {% endfor %}
-</h4>
+{% for rating in rating_list %}
+<li>{{rating.score}}</li> out of 5 submitted by <a href="/user_details/{{ rating.user_id }}">{{ rating.user.first_name
+  }} {{ rating.user.last_name }}</a>
+{% endfor %}
+
 
 {% endblock %}
 
