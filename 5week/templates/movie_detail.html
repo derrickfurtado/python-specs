@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block navbar %} 
+
 {% endblock %}
 
 
@@ -24,7 +25,21 @@
 <h3>
   Lead Actor: <a href="/actor_details/{{movie.cast_list[0].actor.id}}">{{ movie.cast_list[0].actor.full_name }}</a>
 </h3>
-
+<div id="rating_submission_form">
+  <h2><label for="score">Rate this film:</label></h2>
+<form action="/add_rating" method="POST">
+  <select name="score" id="rating_box">
+    <option value="1">One</option>
+    <option value="2">Two</option>
+    <option value="3">Three</option>
+    <option value="4">Four</option>
+    <option value="5">Five</option>
+  </select>
+  <textarea name="description" id="description_box" cols="25" rows="5"></textarea>
+  <input type="hidden" name="movie_id" value={{movie.id}}>
+  <input type="submit">
+</form>
+</div>
 <h3>
   Average Score:
 </h3>

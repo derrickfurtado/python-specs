@@ -21,18 +21,20 @@
 
 <body>
   {% for msg in get_flashed_messages() %}
-    <p class="flash-msg">
-      {{ msg }}
-    </p>
+  <p class="flash-msg">
+    {{ msg }}
+  </p>
   {% endfor %}
 
 
   <nav>
-    <a href="/homepage"><button>Home Page</button></a>
+    {% if request.path != "/homepage" %}
     <a href="/dashboard"><button>Dashboard</button></a>
     <a href="/all_movies"><button>All Movies</button></a>
     <a href="/all_users"><button>All Users</button></a>
     <a href="/all_actors"><button>All Actors</button></a>
+    <a href="/sign_out"><button>Sign Out</button></a>
+    {% endif %}
 
     {% block navbar %}
     {% endblock %}

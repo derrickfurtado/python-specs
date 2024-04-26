@@ -14,6 +14,20 @@ def create_user(first_name, last_name, email, password):
 def user_check_by_email(email):
     return User.query.filter(User.email == email).first()
 
+def check_user_credentials(email, password):
+    user_check = User.query.filter(User.email == email).first()
+    if user_check:
+        password_check = user_check.password
+        if password == password_check:
+            return user_check.id
+        else:
+            return False
+    else:
+        return False
+
+
+#######################
+
 def show_all_users():
     return User.query.all()
 
@@ -39,16 +53,14 @@ def get_movie_by_id(movie_id):
 
 #######################
 
-def create_rating(user, movie, score, description):
-    new_rating = Rating(user = user, movie = movie, score = score, description = description)
-    return new_rating
-
 def get_ratings_by_id(movie_id):
     rating_list = Rating.query.filter_by(movie_id = movie_id).all()
     return rating_list
 
 def get_rating_stats(movie_id):
     rating_list = Rating.query.filter_by(movie_id = movie_id).all()
+    if len(rating_list) == 0:
+        return 0
     total_score = 0
     counter = 0
     for score in rating_list:
@@ -61,7 +73,6 @@ def get_rating_stats(movie_id):
         average_rating = f"{average_rating} 👌"
     else:
         average_rating = f"{average_rating} 🔥"
-
     return average_rating
 
 
@@ -82,9 +93,8 @@ def create_actor_movie_index(cast_id, movie_id):
     return new_pairing
 
 
-
-
-
 if __name__ == "__main__":
     from server import app
     connect_to_db(app)
+
+

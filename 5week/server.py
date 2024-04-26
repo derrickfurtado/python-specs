@@ -1,6 +1,6 @@
 """Server for movie ratings app."""
 
-from flask import Flask, render_template, redirect, request, flash, session
+from flask import Flask, render_template, redirect, request, flash, session, url_for
 import crud, pdb
 import model
 from jinja2 import StrictUndefined
@@ -22,9 +22,26 @@ def dashboard():
     movie_list = crud.show_all_movies()
     return render_template("dashboard.html", movie_list = movie_list)
 
-@app.route("/login")
+@app.route("/login", methods = ["POST"])
 def login():
-    return render_template("dashboard.html")
+    email = request.form["email"]
+    password = request.form["password"]
+    auth_check = crud.check_user_credentials(email,password)
+    movie_list = crud.show_all_movies()
+    if auth_check:
+        session["user_id"] = auth_check
+
+        flash("Login Successful!")
+        return render_template("dashboard.html", movie_list = movie_list, user_id = auth_check)
+    else:
+        flash("Login credentials are incorrect!")
+        return render_template("homepage.html")
+
+@app.route("/sign_out")
+def log_out():
+    del session["user_id"]
+    flash("Successfully logged out!")
+    return redirect("/homepage")
 
 @app.route("/create_account", methods = ["POST"])
 def create_account():
@@ -86,9 +103,17 @@ def actor_details(actor_id):
 
 #######################
 
-@app.route("/add_rating")
+@app.route("/add_rating", methods=["POST"])
 def add_rating():
-    return render_template("add_rating.html")
+    user_id = session["user_id"]
+    movie_id = request.form["movie_id"]
+    score = int(request.form["score"])
+    description = request.form["description"]
+    new_rating = model.Rating(user_id = user_id, movie_id = movie_id, score = score, description = description)
+    model.db.session.add(new_rating)
+    model.db.session.commit()
+    flash("Rating has been submitted!")
+    return redirect(url_for("movie_details", movie_id = request.form["movie_id"]))
 
 
 
