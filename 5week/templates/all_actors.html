@@ -12,7 +12,15 @@
 
 
 {% block body %}
-All Actors
+
+    {% for actor in actor_list %}
+
+        <li>
+            <a href="/actor_details/{{ actor.id }}">{{ actor.full_name }}</a>
+        </li>
+
+
+    {% endfor %}
 {% endblock %}
 
 {% block after_body %}

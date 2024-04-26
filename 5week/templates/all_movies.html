@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-ALL MOVIES
+All Movies
 {% endblock %}
 
 {% block head %}
@@ -16,8 +16,9 @@ ALL MOVIES
 <h2>List of Movies</h2>
     <section id="movie_section">
         {% for movie in movie_list %}
-            <!-- <img id="movie_poster" src="{{ movie.img_url}}"> -->
-            <li>{{ movie.title }}</li>
+            <a href="/movie_detail/{{ movie.id }}">
+                <li>{{ movie.title }}</li>
+            </a>
         {% endfor %}
     </section>
 {% endblock %}

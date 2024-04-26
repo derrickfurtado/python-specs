@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
+{{ actor.full_name }}
 {% endblock %}
 
 {% block head %}
@@ -12,7 +13,14 @@
 
 
 {% block body %}
-Actor Detail
+    <h1>{{actor.full_name}}</h1>
+    <li>DOB = {{ actor.dob.strftime('%B %d, %Y') }}</li>
+    <p>{{ actor.bio }}</p>
+
+    {% for film in work_list %}
+        <a href="/movie_detail/{{film.movie.id}}"><li>{{film.movie.title}}</li></a>
+    {% endfor %}
+
 {% endblock %}
 
 {% block after_body %}

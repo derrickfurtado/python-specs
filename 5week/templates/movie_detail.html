@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
+<!-- {{ movie.title }} - Details -->
 {% endblock %}
 
 {% block head %}
@@ -12,7 +13,18 @@
 
 
 {% block body %}
-Movie Detail
+<h1>{{ movie.title }}</h1>
+
+<p>
+  {{ movie.description }}
+</p>
+
+<img id="movie_poster" src="{{ movie.img_url }}">
+
+<h3>
+    Lead Actor: <a href="/actor_details/{{movie.cast_list[0].actor.id}}">{{ movie.cast_list[0].actor.full_name }}</a>
+</h3>
+
 {% endblock %}
 
 {% block after_body %}

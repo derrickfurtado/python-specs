@@ -1,7 +1,7 @@
 """Server for movie ratings app."""
 
 from flask import Flask, render_template, redirect, request, flash, session
-from crud import create_rating, create_user, show_all_movies
+import crud, pdb
 from model import connect_to_db
 from jinja2 import StrictUndefined
 from key import server_key
@@ -21,38 +21,50 @@ def homepage():
 def login():
     return render_template("login.html")
 
-@app.route("/actor_details")
-def actor_details():
-    return render_template("actor_detail.html")
-
-@app.route("/add_rating")
-def add_rating():
-    return render_template("add_rating.html")
-
-@app.route("/all_actors")
-def show_actors():
-    return render_template("all_actors.html")
-
-@app.route("/all_movies")
-def show_movies():
-    movie_list = show_all_movies()
-    return render_template("all_movies.html", movie_list = movie_list)
+@app.route("/create_account")
+def create_account():
+    return render_template("create_account.html")
 
 @app.route("/all_users")
 def show_users():
     return render_template("all_users.html")
 
-@app.route("/create_account")
-def create_account():
-    return render_template("create_account.html")
-
-@app.route("/movie_details")
-def movie_details():
-    return render_template("movie_detail.html")
-
 @app.route("/user_details")
 def user_details():
     return render_template("user_profile.html")
+
+#######################
+
+@app.route("/all_movies")                                                           ### view all movies
+def show_movies():
+    movie_list = crud.show_all_movies()
+    return render_template("all_movies.html", movie_list = movie_list)
+
+@app.route("/movie_detail/<movie_id>")                                                         ### view a single movie
+def movie_details(movie_id):
+    movie = crud.get_movie_by_id(movie_id)
+    return render_template("movie_detail.html", movie = movie)
+
+#######################
+
+@app.route("/all_actors")
+def show_actors():
+    actor_list = crud.show_all_actors()
+    return render_template("all_actors.html", actor_list = actor_list)
+
+@app.route("/actor_details/<actor_id>")
+def actor_details(actor_id):
+    actor = crud.get_actor_by_id(actor_id)
+    work_list = actor.cast_list
+    return render_template("actor_detail.html", actor = actor, work_list = work_list)
+
+#######################
+
+@app.route("/add_rating")
+def add_rating():
+    return render_template("add_rating.html")
+
+
 
 
 
